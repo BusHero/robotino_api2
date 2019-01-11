@@ -1,0 +1,59 @@
+SET(
+  NAME
+  rec_joystick
+)
+
+SET( MAIN_HEADER Joystick.h )
+
+IF( WIN32 )
+	SET( SRCS Joystick.cpp JoystickImpl_win32.cpp )
+	SET( HEADER JoystickImpl_win32.h )
+ELSE( WIN32)
+	SET( SRCS Joystick.cpp JoystickImpl_linux.cpp )
+	SET( HEADER JoystickImpl_linux.h )
+ENDIF( WIN32 )
+
+
+IF(NOT APPLE)
+	ADD_LIBRARY(
+		${NAME}
+		STATIC
+		${SRCS}
+		${MAIN_HEADER}
+		${HEADER}
+	)
+ENDIF( NOT APPLE )
+
+
+IF(WIN32)
+	SET_TARGET_PROPERTIES(
+	  ${NAME}
+	  PROPERTIES
+	  COMPILE_FLAGS "/wd4251 /MP"
+	)
+
+	TARGET_LINK_LIBRARIES(
+		${NAME}
+		dinput8
+	)
+ENDIF( WIN32 )
+
+SET( REC_JOYSTICK_INCLUDE_INSTALL_DIR include/rec/joystick )
+
+IF(NOT APPLE)
+	INSTALL(
+		TARGETS ${NAME}
+		ARCHIVE DESTINATION lib
+		LIBRARY DESTINATION lib
+		RUNTIME DESTINATION lib
+	)
+
+	INSTALL(
+		FILES
+		${MAIN_HEADER}
+		DESTINATION ${REC_JOYSTICK_INCLUDE_INSTALL_DIR}
+	)
+
+	SOURCE_GROUP( "Source Files" FILES ${SRCS} ${HEADER} )
+
+ENDIF (NOT APPLE)

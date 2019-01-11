@@ -1,0 +1,11 @@
+Package: robotino-daemons
+Version: @ROBOTINO_DAEMONS_VERSION@
+Section: base
+Priority: optional
+Architecture: @ARCHITECTURE@
+Depends: robotino-common ( >= 0.9.10 ), rec-rpc-qt4.5.0, libqtcore4 ( >= 4.5.0 ), libqtgui4 ( >= 4.5.0 ), libqt4-network ( >= 4.5.0 ), libqt4-xml ( >= 4.5.0 )
+Conflicts: openrobotino2, openrobotino1
+Replaces: openrobotino2, openrobotino1
+Maintainer: REC GmbH
+Description: Middleware components for Robotino
+

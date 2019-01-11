@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ]; then
+	chown root:root /usr/local/robotino
+	chown -R root:root /usr/local/robotino/common
+	chown -h root:root /usr/bin/iocom
+	chown -h root:root /usr/bin/ns2report
+	chown -h root:root /usr/bin/robparam
+	chown -h root:root /usr/bin/robprocess
+	chown -h root:root /usr/bin/robtopic
+	chown root:root /etc/ld.so.conf.d/robotino_common.conf
+	chown root:root /etc/robotino
+	chown root:root /etc/robotino/robparam.conf
+	chown root:root /etc/robotino/robprocess.conf
+	chown root:root /etc/robotino/robtopic.conf
+	ldconfig
+fi

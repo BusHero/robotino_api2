@@ -1,0 +1,22 @@
+<package>
+  <description brief="rec_rpc_server">
+
+     Example REC RPC server interfacing a ROS system
+
+  </description>
+  <author>Dr. Christian Verbeek, REC GmbH, servicerobotics.eu</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://servicerobotics.eu/en/other-projects/rec_rpc</url>
+  <depend package="roscpp"/>
+  <depend package="actionlib"/>
+  <depend package="tf"/>
+  <depend package="std_srvs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="move_base"/>
+  <depend package="nav_msgs"/>
+
+</package>
+
+

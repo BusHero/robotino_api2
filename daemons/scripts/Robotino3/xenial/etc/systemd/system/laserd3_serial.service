@@ -1,0 +1,10 @@
+[Unit]
+Description="laserd3_serial"
+BindsTo=dev-scanner.device
+
+[Service]
+ExecStart=/usr/local/robotino/daemons/bin/laserd3 -device=/dev/scanner -channel=0
+Restart=on-failure
+RestartSec=2s
+
+[Install]

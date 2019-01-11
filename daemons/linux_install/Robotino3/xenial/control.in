@@ -1,0 +1,11 @@
+Package: robotino-daemons
+Version: @ROBOTINO_DAEMONS_VERSION@
+Section: base
+Priority: optional
+Architecture: @ARCHITECTURE@
+Depends: @DEPENDS@
+Conflicts: openrobotino2, openrobotino1
+Replaces: openrobotino2, openrobotino1
+Maintainer: REC GmbH
+Description: Middleware components for Robotino
+

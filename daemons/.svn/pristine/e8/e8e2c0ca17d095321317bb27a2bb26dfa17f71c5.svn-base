@@ -1,0 +1,10 @@
+#!upstart
+description "rpcd"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+exec /usr/local/robotino/daemons/bin/rpcd 1>>/var/log/rpcd 2>>/var/log/rpcd
+
+respawn
+

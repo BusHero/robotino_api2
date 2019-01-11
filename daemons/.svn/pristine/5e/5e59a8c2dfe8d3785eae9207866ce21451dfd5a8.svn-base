@@ -1,0 +1,9 @@
+[Unit]
+Description="gyrod"
+
+[Service]
+ExecStart=/usr/local/robotino/daemons/bin/gyrod -device=/dev/gyro
+Restart=always
+RestartSec=1
+
+[Install]

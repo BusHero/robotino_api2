@@ -1,0 +1,39 @@
+SET(
+  NAME
+  rec_dataexchange_client_test
+)
+
+FILE( GLOB SRCS *.cpp )
+FILE( GLOB HEADER *.h )
+
+SET( MOC_SRCS )
+
+QT_WRAP_CPP(
+	${NAME}
+	MOC_SRCS
+	${HEADER}
+)
+
+ADD_EXECUTABLE(
+	${NAME}
+	WIN32
+	${SRCS}
+	${HEADER}
+	${MOC_SRCS}
+)
+
+TARGET_LINK_LIBRARIES(
+  ${NAME}
+  ${QT_QTMAIN_LIBRARY}
+  ${QT_QTCORE_LIBRARY}
+  ${QT_QTGUI_LIBRARY}
+  rec_dataexchange
+)
+
+SOURCE_GROUP( "Source Files" FILES ${SRCS} ${HEADER} )
+SOURCE_GROUP( Moc REGULAR_EXPRESSION "(moc_|qrc_)" )
+
+IF( REC_DATAEXCHANGE_TEST )
+ADD_SUBDIRECTORY( console )
+ENDIF( REC_DATAEXCHANGE_TEST )
+

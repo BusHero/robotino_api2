@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans>
+	<!--       1234567890123456      1234567890123456      1234567890123456      1234567890123456-->
+	<entry de="Abbruch m. Taste" en="Abort with key"   fr="Arreter a.touche" es="Caida con tecla"  />
+	<entry de="Ausführen..."     en="Execute..."       fr="Executer..."      es="Ejecutar..." />
+	<entry de="DEMOs"            en="DEMOs"            fr="DEMOs"            es="DEMOs" />
+	<entry de="Deutsch"          en="Deutsch"          fr="Deutsch"          es="Deutsch" />
+	<entry de="English"          en="English"          fr="English"          es="English" />
+	<entry de="Francais"         en="Francais"         fr="Francais"         es="Francais" />
+	<entry de="Espanol"          en="Espanol"          fr="Espanol"          es="Espanol" />
+	<entry de="Fehler!"          en="Error!"           fr="Erreur!"          es="Error!" />
+	<entry de="Hauptmenu"        en="Main menu"        fr="Menu principal"   es="Menu principal" />
+	<entry de="IP-Adresse"       en="IP-Address"       fr="Adresse IP"       es="Direccion IP" />
+	<entry de="Kreis"            en="Circle"           fr="Cercle"           es="Circulo" />
+	<entry de="Ladezustand"      en="State of charge"  fr="Etat de charge"   es="Estado de carga" />
+	<entry de="Linie folgen"     en="Follow line"      fr="Suivi ligne"      es="Seguir una linea" />
+	<entry de="Netzmaske"        en="Netmask"          fr="Masque de reseau" es="Mascara subred" />
+	<entry de="Netzwerk"         en="Network"          fr="Reseau"           es="Red" />
+	<entry de="ROBOTINO"         en="ROBOTINO"         fr="ROBOTINO"         es="ROBOTINO" />
+	<entry de="Spannung"         en="Voltage"          fr="Tension"          es="Tension" />
+	<entry de="Sprachen"         en="Languages"        fr="Langues"          es="Idiomas" />
+	<entry de="Strom"            en="Current"          fr="Courant"          es="Corriente" />
+	<entry de="Verbunden..."     en="Connected..."     fr="Connecte..."      es="Conectado..." />
+	<entry de="Viereck"          en="Quadrangle"       fr="Carre"            es="Cuadrilatero" />
+	<entry de="Vorwärts"         en="Forward"          fr="Ligne droite"     es="Avance" />
+  <entry de="Erkunden"         en="Roaming"          fr="Exploration"      es="Explorar" />
+  <entry de="Manipulator"      en="Manipulator"      fr="Manipulateur"     es="Manipulador" />
+	<entry de="Wandverfolgung"   en="Wall following"   fr="Suivi d'un mur"   es="Seguir una pared" />
+	<entry de="Ind.Sensor AI0"   en="Ind.Sensor AI0"   fr="Capteur.Ind AI0"  es="Sensor.Ind AI0" />
+	<entry de="Info"             en="Info"             fr="Info"             es="Info" />
+	<entry de="My Prg 1"         en="My Prg 1"         fr="My Prg 1"         es="My Prg 1" />
+	<entry de="My Prg 2"         en="My Prg 2"         fr="My Prg 2"         es="My Prg 2" />
+	<entry de="My Prg 3"         en="My Prg 3"         fr="My Prg 3"         es="My Prg 3" />
+	<entry de="Batterien leer!"  en="batteries empty!" fr="batteries vides!" es="baterías vacias!" />
+	<entry de="Programme"        en="Programs"         fr="Programs"         es="Programs" />
+	<entry de="System auswählen" en="Select system"    fr="Select system"    es="Select system" />
+	<entry de="Stoßleiste,speed" en="Bumper,max.speed" fr="Parechoc,speed"	 es="Bumper,max.speed" />
+	<entry de="An,max=2000rpm"   en="On,max=2000rpm"   fr="marche,max=2000"  es="conectar,2000rpm" />
+	<entry de="Aus"              en="Off"              fr="arrêt"            es="relajar" />
+	<entry de="Prog. mit Kamera" en="Can't start prog" fr="Exéc. impossible" es="Ejecucion  no." />
+	<entry de="nicht ausführbar" en="with  camera"     fr="Prog.avec camera" es="Prog. tiene cám." />
+	<entry de="Ablaufsteuerung"  en="Can't start flow" fr="Exéc impos prog"  es="No ejecuta prog." />
+	<entry de="nicht möglich"    en="control program." fr="commande séquent" es="de control flujo." />
+	<entry de="Statisch"         en="Static"           fr="Statique"         es="Estatico" />
+	<entry de="DHCP"             en="DHCP"             fr="DCHP"             es="DHCP" />
+	<entry de="DHCP aktiviert"   en="DHCP activated"   fr="DCHP active"      es="DHCP activar" />
+	<entry de="Datei existiert"  en="File not found"   fr="Fichier non"      es="Archivo no" />
+	<entry de="nicht"            en=""                 fr="trouvé"           es="encontrado" />
+	<entry de="Nicht möglich"    en="Not possible"     fr="Pas possibl.avec" es="No es posible" />
+	<entry de="mit v2.0 web"     en="in v2.0 web"      fr="la v2.0 web"      es="con v2.0 web" />
+	<entry de="aktiviert"        en="activated"        fr="active"           es="activar" />
+	<entry de="Bitte auf CL"     en="Switch to CL"     fr="Changer sur AP"   es="Cambio en modo CL" />
+	<entry de="Bitte auf AP"     en="Switch to AP"     fr="Changer sur CL"   es="Cambio en modo AP" />
+	<entry de="Modus umschalten" en="mode first"       fr="mode en premier"  es="primera" />
+	<entry de="Neustart"         en="Reboot"           fr="Redémarrage"      es="Reiniciar" />
+	<entry de="Neustart..."      en="Reboot..."        fr="Redémarrage..."   es="Reiniciar..." />
+	<entry de="Ausschalten"      en="Shutdown"         fr="Arreter le sys"   es="apagar" />
+	<entry de="Ausschalten..."   en="Shutdown..."      fr="Arreter le sys"   es="apagar..." />
+	<entry de="Suche AP"         en="Searching AP"     fr="chercher AP"      es="buscar AP" />
+	<entry de="Suche AP ..."     en="Searching AP ..." fr="chercher AP ..."  es="buscar AP ..." />
+	<entry de="Programmierung"   en="Programming"      fr="programmation"    es="la programación" />
+	<entry de="fehlgeschlagen"   en="failed"           fr="fallar"           es="fracasar" />
+	<entry de="erfolgreich"      en="success"          fr="avec succès"      es="afortunado" />
+	<entry de="Allnet AP in"     en="Allnet AP in"     fr="Allnet AP"        es="Allnet AP" />
+	<entry de="Client Mode"      en="Client Mode"      fr="Client Mode"      es="Client Mode" />
+	<entry de="gefunden"         en="found"            fr="trouvé"           es="encontrar" />
+	<entry de="AP Mode"          en="AP Mode"          fr="AP Mode"          es="AP Mode" />
+	<entry de="nicht gefunden"   en="not found"        fr="non trouvé"       es="non encontrar" />
+	<entry de="AP Konfiguration" en="AP configuration" fr="configuration AP" es="AP configuración" />
+	<entry de="Nicht verfügbar"  en="not available"    fr="na"               es="na" />
+	<entry de="Programmiere"     en="programming"      fr="programmer"       es="programar" />
+	<entry de="Abbrechen"        en="Cancel"           fr="abandon"          es="cancelar algo" />
+	<entry de="Start"            en="Start"            fr="démarrage"        es="el arranque" />
+	<entry de="Update"           en="Update"           fr="Upgrader"         es="Actualizar" />
+	<entry de="keine EA09"       en="no EA09"          fr="ne EA09"          es="no EA09" />
+  <entry de="kein Paket"       en="no package"       fr="ne package"       es="no paquete" />
+  <entry de="Steuerung aktiv"  en="Control active"   fr=""                 es="" />
+  <entry de="System anhalten"  en="System halt"      fr=""                 es="" />
+  <entry de="Übernehmen"       en="Apply"            fr=""                 es="" />
+  <entry de="Nicht verfügbar"  en="Not available"    fr=""                 es="" />
+  <entry de="Weiter m. Taste"  en="Press any key"    fr=""                 es=""  />
+  <entry de="Aktivieren"       en="Activate"         fr=""                 es=""  />
+  <entry de="Zeige SSID"       en="Show SSID"        fr=""                 es=""  />
+  <entry de="Zeige Kanal"      en="Show Channel"     fr=""                 es=""  />
+  <entry de="Init AP"          en="Init AP"          fr=""                 es=""  />
+  <entry de="Init client"      en="Init client"      fr=""                 es=""  />
+  <entry de="Suche"            en="Search"           fr=""                 es=""  />
+</trans>

@@ -1,0 +1,1 @@
+ATTRS{idVendor}=="1e29", ATTRS{idProduct}=="0411", TAG+="systemd", ENV{SYSTEMD_WANTS}="gyrod.service", SYMLINK+="gyro", RUN+="/sbin/modprobe ftdi_sio", RUN+="/bin/sh -c 'echo 1e29 0411 > /sys/bus/usb-serial/drivers/ftdi_sio/new_id'"

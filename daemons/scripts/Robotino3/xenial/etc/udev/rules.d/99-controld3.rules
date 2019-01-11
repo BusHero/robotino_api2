@@ -1,0 +1,1 @@
+KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="1e29", ATTRS{idProduct}=="040d", ATTRS{manufacturer}=="REC GmbH", ATTRS{product}=="Robotino 3", TAG+="systemd", ENV{SYSTEMD_WANTS}="controld3.service" 

@@ -1,0 +1,10 @@
+<List>  
+<settingCategory>  
+    <categoryName>Move</categoryName>  
+    <parentID>root</parentID>  
+</settingCategory>  
+<settingCategory>  
+    <categoryName>Gyroscope</categoryName>  
+    <parentID>root</parentID>  
+</settingCategory>  
+</List>  

@@ -1,0 +1,1 @@
+copy server.settings server.vcproj.%USERDOMAIN%.%USERNAME%.user

@@ -1,0 +1,144 @@
+digraph G {
+	size ="2,2"; ratio=auto;
+	
+	node [shape=box,color=lightblue,style=filled];
+	
+	image;
+	camera_settings [shape=parallelogram];
+	set_camera_settings;
+	camera_capabilities [shape=parallelogram];
+	
+
+	motor0_setpoint;
+	motor0_mode [shape=parallelogram];
+	set_motor0_mode;
+	
+	motor1_setpoint;
+	motor1_mode [shape=parallelogram];
+	set_motor1_mode;
+	
+	motor2_setpoint;
+	motor2_mode [shape=parallelogram];
+	set_motor2_mode;
+	
+	motor3_setpoint;
+	motor3_mode [shape=parallelogram];
+	set_motor3_mode;
+	
+	omnidrive;
+	emergency_bumper [shape=parallelogram];
+	set_emergency_bumper;
+
+	odometry;
+	gyroscope;
+	
+	northstar;
+	set_northstar_parameters [shape=parallelogram];
+	
+	display_text;
+	display_backlight;
+	display_buttons;
+	display_vbar;
+	display_hbar;
+	display_progress;
+	display_clear;
+	
+	laserrangefinder;
+	
+	cbha_sensors;
+	cbha_pressure;
+	
+	ea_version [shape=parallelogram];
+	ea09_ip4address [shape=parallelogram];
+	set_ea09_ip4address;
+	
+	set_shutdown;
+	power_button;
+	request_shutdown;
+	
+	current_controller [shape=tripleoctagon];
+	
+	node [shape="",color="",style=""];
+
+	controld2 -> odometry;
+	controld2 -> emergency_bumper;
+	controld2 -> ea09_ip4address;
+	controld2 -> ea_version;
+	controld2 -> motor0_mode;
+	controld2 -> motor1_mode;
+	controld2 -> motor2_mode;
+	controld2 -> motor3_mode;
+	controld2 -> power_button;
+	
+	omnidrive -> controld2;
+	motor0_setpoint -> controld2;
+	motor1_setpoint -> controld2;
+	motor2_setpoint -> controld2;
+	motor3_setpoint -> controld2;
+	set_motor0_mode -> controld2;
+	set_motor1_mode -> controld2;
+	set_motor2_mode -> controld2;
+	set_motor3_mode -> controld2;
+	set_emergency_bumper -> controld2;
+	gyroscope -> controld2;
+	set_ea09_ip4address -> controld2;
+	
+	lcdd2 -> display_buttons;
+	display_text -> lcdd2;
+	display_backlight -> lcdd2;
+	display_vbar -> lcdd2;
+	display_hbar -> lcdd2;
+	display_progress -> lcdd2;
+	display_clear -> lcdd2;
+	
+	camd2 -> image;
+	camd2 -> camera_settings;
+	camd2 -> camera_capabilities;
+	set_camera_settings -> camd2;
+	
+	gyrod2 -> gyroscope;
+	
+	menud -> display_text;
+	menud -> display_backlight;
+	menud -> display_vbar;
+	menud -> display_hbar;
+	menud -> display_progress;
+	menud -> display_clear;
+	menud -> set_emergency_bumper;
+	menud -> set_ea09_ip4address;
+	display_buttons -> menud;
+	emergency_bumper -> menud;
+	ea09_ip4address -> menud;
+	ea_version -> menud;
+	power_button -> menud;
+	request_shutdown -> menud;
+	
+	nstard2 -> northstar;
+	set_northstar_parameters -> nstard2;
+	
+	laserd2 -> laserrangefinder;
+	
+	ruesseld2 -> cbha_sensors;
+	cbha_pressure -> ruesseld2;
+	
+	iod2 -> current_controller;
+	
+	/*API [shape=polygon,sides=8,peripheries=2,color=green,style=filled]
+	API -> omnidrive;
+	API -> motor0_setpoint;
+	API -> motor1_setpoint;
+	API -> motor2_setpoint;
+	API -> set_camera_settings;
+	API -> display_text;
+	API -> cbha_pressure;
+	API -> set_northstar_parameters;
+	API -> request_shutdown;
+	odometry -> API;
+	image -> API;
+	camera_settings -> API;
+	camera_capabilities -> API;
+	northstar -> API;
+	cbha_sensors -> API;
+	laserrangefinder -> API;
+	*/
+}

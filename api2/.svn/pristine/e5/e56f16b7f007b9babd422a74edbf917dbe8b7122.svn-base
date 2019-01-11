@@ -1,0 +1,78 @@
+SET(
+  NAME
+  robotinocontrol
+)
+
+INCLUDE_DIRECTORIES(
+  ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+FILE( GLOB SRCS *.cpp )
+FILE( GLOB HEADER *.h )
+SET( RPC_SRCS ${COMMON_DIR}/lib/rec/robotino/rpc/Client.cpp ${COMMON_DIR}/lib/rec/robotino/rpc/common.cpp )
+SET( RPC_HEADER ${COMMON_DIR}/lib/rec/robotino/rpc/Client.h ${COMMON_DIR}/lib/rec/robotino/rpc/common.h )
+
+MY_WRAP_CPP(
+	MOC_SRCS
+	${NAME}
+	${HEADER}
+)
+
+MY_WRAP_CPP(
+	MOC_RPC_SRCS
+	"rec_robotino_rpc"
+	${RPC_HEADER}
+)
+
+QT4_ADD_RESOURCES(
+	RCC_SRCS
+	icons.qrc
+)
+
+ADD_EXECUTABLE(
+	${NAME}
+	WIN32
+	${SRCS}
+	${HEADER}
+	${RPC_SRCS}
+	${RPC_HEADER}
+	${MOC_SRCS}
+	${MOC_RPC_SRCS}
+	${RCC_SRCS}
+)
+
+IF(WIN32 AND NOT MINGW)
+	SET_TARGET_PROPERTIES( ${NAME} PROPERTIES COMPILE_FLAGS "/MP" )
+ENDIF(WIN32 AND NOT MINGW)
+
+TARGET_LINK_LIBRARIES(
+	${NAME}
+	${QT_QTCORE_LIBRARY}
+	${QT_QTMAIN_LIBRARY}
+	${QT_QTNETWORK_LIBRARY}
+	${QT_QTXML_LIBRARY}
+	${QT_QTGUI_LIBRARY}
+	${QT_HELP_LIBRARIES}
+	rec_rpc
+	rec_cv_lt
+)
+
+SOURCE_GROUP( "Source Files" FILES ${SRCS} ${HEADER} )
+SOURCE_GROUP( "rpc" FILES ${RPC_SRCS} ${RPC_HEADER} )
+SOURCE_GROUP( Moc REGULAR_EXPRESSION "(moc_|qrc_)" )
+
+GENERATE_VERSION( ${NAME} "${CMAKE_CURRENT_BINARY_DIR}/robotinocontrol_version.h" ${ROBOTINO_API_VERSION} "RobotinoControl" "robotinocontrol.exe" )
+
+INSTALL(
+  TARGETS 
+  ${NAME}
+  DESTINATION ${BIN_INSTALL_DIR}
+)
+
+FILE( GLOB INF ${CMAKE_CURRENT_SOURCE_DIR}/*.inf )
+	
+INSTALL(
+	FILES
+	${INF}
+	DESTINATION ${BIN_INSTALL_DIR}
+)

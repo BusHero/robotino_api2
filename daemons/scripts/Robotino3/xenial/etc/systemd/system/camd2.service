@@ -1,0 +1,9 @@
+[Unit]
+Description="camd2"
+After=rpcd.service
+
+[Service]
+ExecStart=/usr/local/robotino/daemons/bin/camd2 -device=/dev/video0 -channel=0
+Restart=no
+
+[Install]

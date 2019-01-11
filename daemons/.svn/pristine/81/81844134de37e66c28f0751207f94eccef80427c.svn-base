@@ -1,0 +1,10 @@
+[Unit]
+Description="grapplerd"
+BindsTo=dev-grappler.device
+
+[Service]
+ExecStart=/usr/local/robotino/daemons/bin/grapplerd -device=/dev/grappler
+Restart=on-failure
+RestartSec=2s
+
+[Install]

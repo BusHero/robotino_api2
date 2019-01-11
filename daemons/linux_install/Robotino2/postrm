@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+if [ "$1" = "remove" ]; then
+	rm -f /etc/rc2.d/S01lcdd2cmd || true
+	rm -f /etc/rc2.d/S40rtai || true
+	rm -f /etc/rc2.d/S41rpcd || true
+	rm -f /etc/rc2.d/S41controld2 || true
+	rm -f /etc/rc2.d/S41lcdd2 || true
+	rm -f /etc/rc2.d/S41menud || true
+	
+	rm -f /etc/rc0.d/K10controld2 || true
+	rm -f /etc/rc0.d/S88reset_mount_count || true
+	rm -f /etc/rc0.d/S89robotino_halt || true
+	
+	rm -f /etc/rc6.d/K10controld2 || true
+	rm -f /etc/rc6.d/K11robotino_fpga_pow || true
+	rm -f /etc/rc6.d/S88reset_mount_count || true
+	
+	ldconfig
+fi

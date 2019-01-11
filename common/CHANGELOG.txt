@@ -1,0 +1,38 @@
+1.1.14:
+ - debug motor controller via USB
+ - support for Festool charger
+ - new topics motor_debug, festool_charger_info, start_hotswap, start_motor_debug
+
+1.1.13:
+ - added imageinfo topic
+ - changed grappler communication to reading byte by byte
+
+1.1.12:
+ - minor bug fixes
+
+1.1.11:
+ - fileSystem_request and response topic
+ - smartNavigationCostMap topic
+ - minor bug fixes
+
+1.1.10:
+ - smartstations topic
+ - minor bug fixes
+
+1.1.9:
+ - mapDir topic now also includes preview images of the maps
+
+1.1.7:
+ - introduced smartPersonTracker topic
+
+1.1.6:
+ - introduced customView topic
+
+1.1.5:
+  - introduced ledd topic
+
+0.9.12
+  - gyro param tags
+
+0.9.10
+  - fleetcom messages

@@ -1,0 +1,76 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ]; then
+	/etc/init.d/lcdd2.sh stop || true
+	/etc/init.d/controld2.sh stop || true
+	/etc/init.d/menud.sh stop || true
+	
+	if [ -e /etc/init.d/rtai.sh ] ; then
+		echo Stopping rtai
+		/etc/init.d/rtai.sh stop || true
+	fi
+
+	killall camd2 || true
+	killall ftdid || true
+	killall grapplerd || true
+	killall laserd2 || true
+	killall srd2 || true
+	killall joystickd2 || true
+	killall cbhad || true
+	killall robotinoxtd || true
+	killall controld3 || true
+
+	/etc/init.d/rpcd.sh stop || true
+
+	killall lcdd2cmd || true
+
+	db_get robotino-daemons/install_symlinks
+	if [ "$RET" = true ]; then
+		ln -s -f /etc/init.d/lcdd2cmd.sh /etc/rc2.d/S01lcdd2cmd || true
+		ln -s -f /etc/init.d/rtai.sh /etc/rc2.d/S40rtai || true
+		ln -s -f /etc/init.d/rpcd.sh /etc/rc2.d/S41rpcd || true
+		ln -s -f /etc/init.d/controld2.sh /etc/rc2.d/S41controld2|| true
+		ln -s -f /etc/init.d/lcdd2.sh /etc/rc2.d/S41lcdd2|| true
+		ln -s -f /etc/init.d/menud.sh /etc/rc2.d/S41menud|| true
+		
+		ln -s -f /etc/init.d/controld2.sh /etc/rc0.d/K10controld2 || true
+		ln -s -f /usr/local/robotino/daemons/scripts/reset_mount_count.sh /etc/rc0.d/S88reset_mount_count || true
+		ln -s -f /usr/local/robotino/daemons/scripts/robotino_halt.sh /etc/rc0.d/S89robotino_halt || true
+		
+		ln -s -f /etc/init.d/controld2.sh /etc/rc6.d/K10controld2 || true
+		ln -s -f /usr/local/robotino/daemons/scripts/robotino_fpga_pow.sh /etc/rc6.d/K11robotino_fpga_pow || true
+		ln -s -f /usr/local/robotino/daemons/scripts/reset_mount_count.sh /etc/rc6.d/S88reset_mount_count || true
+
+		chown root.root /usr/local/bin/restart-daemons.sh || true
+		chmod +x /usr/local/bin/restart-daemons.sh || true
+	else
+		rm -f /etc/rc2.d/S01lcdd2cmd || true
+		rm -f /etc/rc2.d/S40rtai || true
+		rm -f /etc/rc2.d/S41rpcd || true
+		rm -f /etc/rc2.d/S41controld2 || true
+		rm -f /etc/rc2.d/S41lcdd2 || true
+		rm -f /etc/rc2.d/S41menud || true
+		
+		rm -f /etc/rc0.d/K10controld || true
+		rm -f /etc/rc0.d/S88reset_mount_count || true
+		rm -f /etc/rc0.d/S89robotino_halt || true
+		
+		rm -f /etc/rc6.d/K10controld || true
+		rm -f /etc/rc6.d/K11robotino_fpga_pow || true
+		rm -f /etc/rc6.d/S88reset_mount_count || true
+	fi
+
+	ldconfig
+	#echo Reboot your system to start services
+	
+	#echo Starting services
+	at -f /usr/local/bin/restart-daemons.sh now || true
+	#/etc/init.d/lcdd2cmd.sh || true
+	#/etc/init.d/rtai.sh start || true
+	#/etc/init.d/rpcd.sh start || true
+	#/etc/init.d/controld2.sh start || true
+	#/etc/init.d/lcdd2.sh start || true
+	#/etc/init.d/menud.sh start || true
+fi

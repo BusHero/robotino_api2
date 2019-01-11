@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+
+db_input high robotino-daemons/install_symlinks || true
+db_go || true

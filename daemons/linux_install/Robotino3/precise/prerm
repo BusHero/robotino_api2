@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "upgrade" -o "$1" = "remove" ]; then
+	echo Stopping services
+
+	killall camd2 || true
+	killall ftdid || true
+	killall grapplerd || true
+	killall srd2 || true
+	killall joystickd2 || true
+	killall cbhad || true
+	killall robotinoxtd || true
+
+	stop rpcd || true
+fi

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pkgbuild --root @CMAKE_CURRENT_BINARY_DIR@/install/ --identifier eu.servicerobotics.robotino_api2 @CMAKE_CURRENT_BINARY_DIR@/api2.pkg
+

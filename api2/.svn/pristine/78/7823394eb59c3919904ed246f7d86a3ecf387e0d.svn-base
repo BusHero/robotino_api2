@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ]; then
+	chown root:root /usr/local/robotino
+	chown -R root:root /usr/local/robotino/api2
+	chown root:root /etc/ld.so.conf.d/robotino_api2.conf
+	ldconfig
+fi

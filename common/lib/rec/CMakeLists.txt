@@ -1,0 +1,30 @@
+ADD_SUBDIRECTORY( cv_lt )
+ADD_SUBDIRECTORY( robotino )
+ADD_SUBDIRECTORY( serialport )
+ADD_SUBDIRECTORY( ea09 )
+ADD_SUBDIRECTORY( nstar )
+ADD_SUBDIRECTORY( nstar2 )
+ADD_SUBDIRECTORY( cruizcore )
+ADD_SUBDIRECTORY( dataexchange_lt )
+ADD_SUBDIRECTORY( pcan )
+ADD_SUBDIRECTORY( vema )
+ADD_SUBDIRECTORY( grappler )
+ADD_SUBDIRECTORY( iocontrol )
+ADD_SUBDIRECTORY( robotino3 )
+ADD_SUBDIRECTORY( robotinoxt )
+ADD_SUBDIRECTORY( yaml )
+
+IF( NOT WIN32 )
+  ADD_SUBDIRECTORY( laserrangefinder )
+ENDIF( NOT WIN32 )
+
+INSTALL(
+	FILES LaserScanMessage.h
+	DESTINATION include/rec
+)
+
+INSTALL(
+	DIRECTORY utils
+	DESTINATION include/rec
+	PATTERN .svn EXCLUDE
+)

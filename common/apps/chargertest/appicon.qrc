@@ -1,0 +1,7 @@
+<RCC version="1.0">
+	<qresource>
+		<file>appicon/16.png</file>
+		<file>appicon/32.png</file>
+		<file>appicon/64.png</file>
+	</qresource>
+</RCC>

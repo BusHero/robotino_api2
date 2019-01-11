@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<root>
+  <statusscreen title="ROBOTINO" iface="eth0,wlan0,allnet">
+    <menu title="Hauptmenu">
+      <menu title="Sprachen">
+        <selectlanguage title="Deutsch" key="de"/>
+        <selectlanguage title="English" key="en"/>
+        <selectlanguage title="Espanol" key="es"/>
+        <selectlanguage title="Francais" key="fr"/>
+      </menu>
+      <chargestate title="Ladezustand" />
+      <menu title="DEMOs">
+        <execute config="DEMO1" />
+        <execute config="DEMO2" />
+        <execute config="DEMO3" />
+        <execute config="DEMO4" />
+        <execute config="DEMO5" />
+        <execute config="DEMO6" />
+        <execute config="DEMO7" />
+        <execute config="DEMO8" />
+        <execute config="DEMO9" />
+        <execute config="MYPRG1" />
+        <execute config="MYPRG2" />
+        <execute config="MYPRG3" />
+        <execute config="MYPRG4" />
+        <execute config="MYPRG5" />
+        <execute config="MYPRG6" />
+        <execute config="MYPRG7" />
+        <execute config="MYPRG8" />
+      </menu>
+      <filemenu config="rvw2prg" />
+      <menu title="Netzwerk">
+        <menu title="eth0">
+          <menu title="Statisch" param="eth0">
+            <ip4address title="IP-Adresse" />
+            <ip4netmask title="Netzmaske" />
+            <cancel title="Abbrechen" />
+            <execute title="Übernehmen" script="set_network_static.pl" func="apply" />
+          </menu>
+          <menu title="DHCP">
+            <cancel title="Abbrechen" />
+            <execute title="Aktivieren" script="set_network_dhcp.pl" param="eth0"/>
+          </menu>
+        </menu>
+        <menu title="wlan0">
+          <menu title="Statisch" param="wlan0">
+            <ip4address title="IP-Adresse" />
+            <ip4netmask title="Netzmaske" />
+            <cancel title="Abbrechen" />
+            <execute title="Übernehmen" script="set_network_static.pl" func="apply" />
+          </menu>
+          <menu title="DHCP">
+            <cancel title="Abbrechen" />
+            <execute title="Aktivieren" script="set_network_dhcp.pl" param="wlan0" />
+          </menu>
+          <menu title="WPA">
+            <readwpa func="pre-activate-from-parent" visible="false" file="/etc/wpa_supplicant/wpa_supplicant.conf"/>
+            <lineedit title="ssid" chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-_.#@*!"/>
+            <combobox title="proto" item0="RSN" item1="WPA" />
+            <combobox title="pairwise" item0="TKIP" item1="CCMP" />
+            <combobox title="group" item0="TKIP" item1="CCMP" />
+            <lineedit title="psk" chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-_.#@*!"/>/>
+            <cancel title="Abbrechen" />
+            <writewpa title="Übernehmen" script="mod_wpa_supplicant.sh"/>
+          </menu>
+        </menu>
+        <menu title="Internal AP">
+          <execute title="Suche AP" script="allnet_find.sh"/>
+          <execute title="Zeige SSID" script="allnet_getssid.sh" />
+          <execute title="Zeige Kanal" script="allnet_getchannel.sh" />
+          <menu title="Mode">
+            <execute title="Init AP" script="allnet_init_ap_mode.sh" />
+            <execute title="Init client" script="allnet_init_client_mode.sh"/>
+          </menu>
+          <execute title="Write FD setup" script="allnet_write_festo_settings.sh"/>
+          <execute title="Reset" script="allnet_reset.sh"/>
+        </menu>
+        <menu title="I/O Board" param="ea09" cond="ea09">
+          <ip4address title="IP-Adresse" />
+          <ip4netmask title="Netzmaske" />
+          <cancel title="Abbrechen" />
+          <setea09ip4address title="Übernehmen" func="apply" />
+        </menu>
+      </menu>
+      <!--<menu title="Info">
+        <execute title="Paket" script="packageversion.sh" />
+        <execute title="OS" script="getOS.sh"/>
+      </menu>
+      <menu title="Stoßleiste,speed">
+        <emergencybumper title="Aus" enable="off" />
+        <emergencybumper title="An,max=2000rpm"  enable="on"/>
+      </menu>-->
+      <menu title="Firmware">
+        <menu title="I/O Board">
+          <execute title="Suche" script="ioboard_find.sh" />
+          <execute title="Update" script="ioboard_update.sh" />
+        </menu>
+      </menu>
+      <execute title="Neustart" command="/sbin/reboot" abort="false" />
+      <execute title="Ausschalten" command="/sbin/halt" abort="false"/>
+    </menu>
+  </statusscreen>
+  <controlactivated title="Steuerung aktiv"/>
+  <requestshutdown title="System anhalten"/>
+</root>

@@ -1,0 +1,1 @@
+copy udp.settings udp.vcproj.%USERDOMAIN%.%USERNAME%.user

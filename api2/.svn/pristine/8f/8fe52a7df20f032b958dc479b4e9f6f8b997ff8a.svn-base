@@ -1,0 +1,8 @@
+Package: robotino-api2
+Version: @ROBOTINO_API2_VERSION@
+Section: base
+Priority: optional
+Architecture: @ARCHITECTURE@
+Maintainer: REC GmbH
+Description: Robotino API2
+

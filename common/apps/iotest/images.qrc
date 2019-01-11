@@ -1,0 +1,12 @@
+<RCC version="1.0">
+	<qresource>
+    <file>images/accept.png</file>
+    <file>images/cancel.png</file>
+    <file>images/warning.png</file>
+    <file>images/info.png</file>
+    <file>images/cog0.png</file>
+    <file>images/cog1.png</file>
+    <file>images/firmware_connection.png</file>
+    <file>images/usb_connection.png</file>
+	</qresource>
+</RCC>

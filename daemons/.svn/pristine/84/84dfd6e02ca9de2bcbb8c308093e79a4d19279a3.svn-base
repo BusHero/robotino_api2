@@ -1,0 +1,13 @@
+ctrl_interface=/var/run/wpa_supplicant
+eapol_version=1
+ap_scan=1
+
+network={
+        ssid="@SSID@"
+        scan_ssid=1
+        proto=@PROTO@
+        key_mgmt=WPA-PSK
+        pairwise=@PAIRWISE@
+        group=@GROUP@
+        psk="@PSK@"
+}

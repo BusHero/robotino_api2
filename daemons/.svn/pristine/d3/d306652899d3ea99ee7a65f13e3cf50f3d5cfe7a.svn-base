@@ -1,0 +1,211 @@
+<html>
+<meta name="viewport" content="width=320" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<head>
+	<title>Robotino</title>
+<style>
+body {
+  margin: 0;
+  font-family: Helvetica;
+  background: #ffffff;
+  color: #000000;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+}
+
+#controlpanel {
+   position:absolute;
+   top:241px;
+   left:0px;
+   padding:1px;
+   margin:0px;
+}
+
+#sensors {
+   position:absolute;
+   top:241px;
+   left:190px;
+   width:115px;
+   padding:1px;
+   margin:0px;
+}
+
+body[orient="portrait"] .container {
+  height: 356px;
+}
+
+body[orient="landscape"] .container {
+#  height: 268px;
+}
+
+.button {
+  border: 0;
+}
+</style>
+<script language="JavaScript">
+var http = null;
+var control_mode = 1;
+var velocity = 1;
+var dist = 1;
+var rot = 1;
+var res = 1;
+
+if( window.XMLHttpRequest ) {
+  http = new XMLHttpRequest();
+} 
+else if( window.ActiveXObject ) {
+  http = new ActiveXObject( "Microsoft.XMLHTTP" );
+}
+else {
+  alert( "no Ajax support found" );
+}
+
+function reloadImage(n) {
+  var now = new Date();
+  if (document.images) {
+    document.images[n].src = n + '.png?' + now.getTime();
+  }
+}
+
+function reloadLiveImage() {
+  reloadImage('liveimage');
+}
+
+function sleepReloadLiveImage() {
+  setTimeout( 'reloadLiveImage()', 200 );
+}
+
+function sendControl( controlUrl, operation, value ) {
+  http.open( "GET", controlUrl + "?" + operation + "=" + value, true );
+//  http.onreadystatechange = displayResponse;
+  http.send( null );
+}
+
+function driveControl( n )
+{
+  setActiveImage( n );
+  sendControl( 'controlpanel.ait', 'op', n );
+}
+
+function driveControlOff( n )
+{
+  setNormalImage( n );
+}
+
+function setActiveImage( n ) 
+{
+  document.images[n].src = 'images/' + n + '_pressed.png';
+  return true;
+}
+function setNormalImage( n ) 
+{
+  document.images[n].src = 'images/' + n + '.png';
+  return true;
+}
+
+function toggle_controlmode()
+{
+    control_mode = control_mode + 1;
+    if( control_mode > 2 )
+    {
+        control_mode = 1;
+    }
+    
+    document.images['control_mode'].src = 'images/control_mode' + control_mode + '.png';
+
+    sendControl( 'controlpanel.ait', 'control_mode', control_mode );
+}
+
+function inc_velocity()
+{
+    velocity = velocity + 1;
+    if( velocity > 5 )
+    {
+        velocity = 1;
+    }
+    
+    document.images['velocity_control'].src = 'images/vel' + velocity + '.png';
+    
+    sendControl( 'controlpanel.ait', 'v', velocity );
+}
+
+function toggle_dist()
+{
+    dist = dist + 1;
+    if( dist > 3 )
+    {
+        dist = 1;
+    }
+    
+    document.images['dist'].src = 'images/dist' + dist + '.png';
+    
+    sendControl( 'controlpanel.ait', 'dist', dist );
+}
+
+function toggle_rot()
+{
+    rot = rot + 1;
+    if( rot > 3 )
+    {
+        rot = 1;
+    }
+    
+    document.images['rot'].src = 'images/rot' + rot + '.png';
+    
+    sendControl( 'controlpanel.ait', 'rot', rot );
+}
+
+function toggle_res()
+{
+    res = res + 1;
+    if( res > 2 )
+    {
+        res = 1;
+    }
+    
+    document.images['res'].src = 'images/res' + res + '.png';
+    
+    sendControl( 'controlpanel.ait', 'res', res );
+}
+
+</script>
+</head>
+<!-- javascript:self.moveTo(0,0);self.resizeTo(screen.availWidth,screen.availHeight); -->
+<body>
+  <table cellpadding="2" cellspacing="0">
+    <tr>
+        <td><img alt="liveimage" width="320" height="240" src="liveimage.png" name="liveimage" onload="reloadLiveImage()" onerror="reloadLiveImage()"/></td>
+    </tr>
+    <tr>
+  <table cellpadding="2" cellspacing="0">
+    <tr>
+      <td><a href="#" onMouseDown="return toggle_dist();"><img name="dist" src="images/dist1.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'nw' );" onMouseUp="return driveControlOff( 'nw' );" onMouseLeave="return driveControlOff( 'nw' );"><img name="nw" src="images/nw.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'n' );" onMouseUp="return driveControlOff( 'n' );" onMouseLeave="return driveControlOff( 'n' );"><img name="n" src="images/n.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'no' );" onMouseUp="return driveControlOff( 'no' );" onMouseLeave="return driveControlOff( 'no' );"><img name="no" src="images/no.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return toggle_controlmode();"><img name="control_mode" src="images/control_mode1.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return toggle_res();"><img name="res" src="images/res1.png" border="0" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="#" onMouseDown="return driveControl( 'ccl' );" onMouseUp="return driveControlOff( 'ccl' );" onMouseLeave="return driveControlOff( 'ccl' );"><img name="ccl" src="images/ccl.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'w' );" onMouseUp="return driveControlOff( 'w' );" onMouseLeave="return driveControlOff( 'w' );"><img name="w" src="images/w.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'stop' );" onMouseUp="return driveControlOff( 'stop' );" onMouseLeave="return driveControlOff( 'stop' );"><img name="stop" src="images/stop.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'o' );" onMouseUp="return driveControlOff( 'o' );" onMouseLeave="return driveControlOff( 'o' );"><img name="o" src="images/o.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'cl' );" onMouseUp="return driveControlOff( 'cl' );" onMouseLeave="return driveControlOff( 'cl' );"><img name="cl" src="images/cl.png" border="0" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="#" onMouseDown="return toggle_rot();"><img name="rot" src="images/rot1.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'sw' );" onMouseUp="return driveControlOff( 'sw' );" onMouseLeave="return driveControlOff( 'sw' );"><img name="sw" src="images/sw.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 's' );" onMouseUp="return driveControlOff( 's' );" onMouseLeave="return driveControlOff( 's' );"><img name="s" src="images/s.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return driveControl( 'so' );" onMouseUp="return driveControlOff( 'so' );" onMouseLeave="return driveControlOff( 'so' );"><img name="so" src="images/so.png" border="0" /></a></td>
+      <td><a href="#" onMouseDown="return inc_velocity();"><img name="velocity_control" src="images/vel1.png" border="0" /></a></td>
+    </tr>
+  </table>
+  </tr>
+  </table>
+<link rel="apple-touch-icon" href="/images/robotino_live.png"/>
+</body>
+</html>

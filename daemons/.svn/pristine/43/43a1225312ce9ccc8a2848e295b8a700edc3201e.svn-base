@@ -1,0 +1,41 @@
+1.2.6:
+ - rpcd fills imageinfo topic
+
+1.2.5:
+ - fixed a bug with grappler: grapplerd lost connection to hardware after a few seconds. Chnaged the way how to read the serial line in grappler lib
+
+1.2.4:
+  - fcgid upload programs to /tmp/upload_programs and copy as root to /home/robotino/programs
+  - fcgid send logs to /tmp/fgcid.log
+
+1.2.3:
+  - Robotino3 internal gyroscope at 1e29:0411
+
+1.2.0:
+  - laserd3 supports all Hokuyo URG rangefinders by using http://urgnetwork.sourceforge.net/html/
+
+1.1.9:
+  - RPLidar (www.slamtec.com) support
+
+1.1.8:
+  - map Hokuyo rangefinders to /dev/scanner and publish data on scan0 topic
+
+1.1.7:
+
+0.9.20:
+  - start laserd2 only if smartsoft is not installed
+
+  bug fixes:
+  -  81: After using omnidrive topic switch to single motor mode when using motor_setpoints topic 
+
+0.9.13: fleetcomd
+          pass communication between fcgid and SmartFestoFleetCom component through fleetcomd to make
+		  features of SmartFestoFleetCom available to API2
+
+0.9.7: controld3
+         compensate gyro drift
+         internal gyroscope is disabled by default
+	   ftdid
+	     does not support NorthStar by default. Use -NS command line option
+
+0.7.8: run restore_default_configuration

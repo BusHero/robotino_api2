@@ -1,0 +1,11 @@
+KERNEL=="video[0-9]*" SUBSYSTEM=="video4linux" DRIVERS=="uvcvideo" ATTR{name}=="UVC Camera (046d:080a)" RUN+="/usr/local/robotino/daemons/bin/camd2_wrapper.sh %n LogitechC905" GOTO="camd2_end"
+
+KERNEL=="video[0-9]*" SUBSYSTEM=="video4linux" DRIVERS=="uvcvideo" ATTR{name}=="UVC Camera (046d:0804)" RUN+="/usr/local/robotino/daemons/bin/camd2_wrapper.sh %n default" GOTO="camd2_end"
+
+KERNEL=="video[0-9]*" SUBSYSTEM=="video4linux" DRIVERS=="uvcvideo" RUN+="/usr/local/robotino/daemons/bin/camd2_wrapper.sh %n default" GOTO="camd2_end"
+
+KERNEL=="video[0-9]*" SUBSYSTEM=="video4linux" ATTR{name}=="gspca main driver" ATTRS{product}=="WebCam Live!   " RUN+="/usr/local/robotino/daemons/bin/camd2_wrapper.sh %n default" GOTO="camd2_end"
+
+KERNEL=="video[0-9]*" SUBSYSTEM=="video4linux" ATTR{name}=="gspca main driver" RUN+="/usr/local/robotino/daemons/bin/camd2_wrapper.sh %n default" GOTO="camd2_end"
+
+LABEL="camd2_end"
