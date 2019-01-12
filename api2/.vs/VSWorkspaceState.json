@@ -1,11 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\lib\\rec",
-    "\\lib\\rec\\robotino",
-    "\\lib\\rec\\robotino\\api2",
-    "\\lib\\rec\\robotino\\api2\\doxygen",
-    "\\lib\\rec\\robotino\\api2\\doxygen\\c"
+    ""
   ],
   "SelectedNode": "\\CMakeSettings.json",
   "PreviewInSolutionExplorer": false

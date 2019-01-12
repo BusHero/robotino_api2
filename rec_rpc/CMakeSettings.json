@@ -1,14 +1,14 @@
 ﻿{
   "configurations": [
     {
-      "name": "x64-Debug",
+      "name": "rec_rpc",
       "generator": "Visual Studio 15 2017 Win64",
-      "configurationType": "Release",
+      "configurationType": "RelWithDebInfo",
       "inheritEnvironments": [
         "msvc_x64_x64"
       ],
-      "buildRoot": "C:\\Users\\petru\\Desktop\\build\\rec_rpc",
-      "installRoot": "C:\\Users\\petru\\Desktop\\install\\rec_rpc",
+      "buildRoot": "${env.USERPROFILE}\\Desktop\\build\\${name}",
+      "installRoot": "${env.USERPROFILE}\\Desktop\\install\\${name}",
       "cmakeCommandArgs": "",
       "ctestCommandArgs": ""
     }
