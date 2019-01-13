@@ -1,8 +1,0 @@
-[Unit]
-Description="ftdid1"
-
-[Service]
-ExecStart=/usr/local/robotino/daemons/bin/ftdid -v -device=/dev/ftdi1
-Restart=no
-
-[Install]

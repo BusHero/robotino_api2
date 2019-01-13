@@ -1,3 +1,0 @@
-SUBSYSTEMS=="usb", DRIVER=="xpad"
-ACTION=="add", ATTR{idVendor}=="045e", ATTR{idProduct}=="0719", RUN+="/usr/local/OpenRobotinoAPI/1/daemons/startstopjoystickd.sh start"
-ACTION=="remove", RUN+="/usr/local/OpenRobotinoAPI/1/daemons/startstopjoystickd.sh stop"

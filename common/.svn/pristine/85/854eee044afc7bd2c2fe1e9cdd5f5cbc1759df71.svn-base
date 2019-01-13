@@ -1,6 +1,0 @@
-#!/bin/sh
-
-chmod -R 755 @CMAKE_CURRENT_BINARY_DIR@/install/DEBIAN
-
-dpkg-deb -b @CMAKE_CURRENT_BINARY_DIR@/install .
-

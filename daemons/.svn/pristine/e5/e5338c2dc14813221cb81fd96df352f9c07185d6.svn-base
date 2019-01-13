@@ -1,6 +1,0 @@
-[Network]
-server=127.0.0.1:12080
-
-[CruizCore]
-;rate in Hz to publish the gyroscope readings at.
-pubrate=50

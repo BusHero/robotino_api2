@@ -1,2 +1,0 @@
-KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="1e29", ATTRS{idProduct}=="040b", RUN+="/usr/local/robotino/daemons/bin/robotinoxtd -daemon -device=/dev/robotinoxt", SYMLINK+="robotinoxt"
-SUBSYSTEM=="block", KERNEL=="sd?", ATTRS{idVendor}=="1e29", ATTRS{idProduct}=="040c", NAME="robotinoxt_bootloader"

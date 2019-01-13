@@ -1,2 +1,0 @@
-SUBSYSTEM=="tty", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="1e29", ATTRS{idProduct}=="0408", RUN+="/usr/local/robotino/daemons/bin/grapplerd -daemon -device=/dev/grappler", SYMLINK+="grappler"
-SUBSYSTEMS=="usb", KERNEL=="sd?", ATTR{idVendor}=="1e29", ATTR{idProduct}=="0409", NAME="grappler_bootloader"

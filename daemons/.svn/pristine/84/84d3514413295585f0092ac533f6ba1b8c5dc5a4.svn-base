@@ -1,7 +1,0 @@
-[Unit]
-Description="simd"
-
-[Service]
-ExecStart=/usr/local/robotino/daemons/bin/simd -v
-Restart=no
-

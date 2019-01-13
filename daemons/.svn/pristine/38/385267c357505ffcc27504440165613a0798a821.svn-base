@@ -1,7 +1,0 @@
-KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", ATTR{name}=="Intel(R) RealSense(TM) 435", GOTO="camd2_end"
-
-KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", DRIVERS=="uvcvideo", TAG+="systemd", ENV{SYSTEMD_WANTS}="camd2.service", GOTO="camd2_end"
-
-KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", ATTR{name}=="gspca main driver", TAG+="systemd", ENV{SYSTEMD_WANTS}="camd2.service", GOTO="camd2_end"
-
-LABEL="camd2_end"

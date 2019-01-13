@@ -1,1 +1,0 @@
-KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="15d1", ATTRS{idProduct}=="0000", ATTRS{manufacturer}=="Hokuyo Data Flex for USB", ATTRS{product}=="URG-Series USB Driver", TAG+="systemd", ENV{SYSTEMD_WANTS}="laserd3_serial.service", SYMLINK+="scanner" 

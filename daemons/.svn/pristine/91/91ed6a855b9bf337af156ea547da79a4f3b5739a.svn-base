@@ -1,7 +1,0 @@
-[General]
-port = /dev/scanner_front
-angle_min = -90
-angle_max = 90
-
-[Network]
-server=127.0.0.1:12080

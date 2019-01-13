@@ -1,4 +1,0 @@
-QMAKESPEC_ORIGINAL=E:/qt-everywhere-opensource-src-4.7.4.tar/qt-everywhere-opensource-src-4.7.4/mkspecs/win32-msvc2010
-
-include(../win32-msvc2010/qmake.conf)
-

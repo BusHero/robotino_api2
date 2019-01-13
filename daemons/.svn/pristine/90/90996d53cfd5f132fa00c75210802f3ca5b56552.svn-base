@@ -1,1 +1,0 @@
-KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="15d1", ATTRS{idProduct}=="0000", ATTRS{manufacturer}=="Hokuyo Data Flex for USB", ATTRS{product}=="URG-Series USB Driver", RUN+="/usr/local/robotino/daemons/bin/laserd2_wrapper.sh scanner%n 0", SYMLINK+="scanner%n"

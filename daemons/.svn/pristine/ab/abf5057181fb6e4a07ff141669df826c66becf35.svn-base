@@ -1,7 +1,0 @@
-Template: robotino-daemons/install_symlinks
-Type: boolean
-Default: false
-Description:  Do you want to install symlinks?
- Create symlinks to deamons in /etc/init.d?
- Configure to start deamons when switching to runlevel 2?
-

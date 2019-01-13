@@ -1,3 +1,0 @@
-# ATTR{product}=="Xbox NUI Camera"
-SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02ae", ACTION=="add" RUN +="/usr/local/robotino/daemons/bin/kinectd_wrapper.sh"
-SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02ae", ACTION=="remove" RUN +="killall kinectd"

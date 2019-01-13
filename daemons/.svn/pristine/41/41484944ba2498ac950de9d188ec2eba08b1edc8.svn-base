@@ -1,8 +1,0 @@
-[Unit]
-Description="controld3"
-
-[Service]
-ExecStart=/usr/local/robotino/daemons/bin/controld3
-Restart=on-failure
-
-[Install]

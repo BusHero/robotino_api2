@@ -1,7 +1,0 @@
-[Network]
-server=127.0.0.1:12080
-disabletcp=1
-disablelocalipc=0
-
-[Webserver]
-port=81
