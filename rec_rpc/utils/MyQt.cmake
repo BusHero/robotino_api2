@@ -19,6 +19,7 @@ IF( WIN32 )
 		${CMAKE_PREFIX_PATH}
 		${QT5DIR}/${SUBPATH}/lib/cmake
 	)
+	message("CMAKE_PREFIX_PATH:${CMAKE_PREFIX_PATH}")
 ENDIF( WIN32 )
 
 find_package( Qt5Widgets )

@@ -3,12 +3,12 @@
     {
       "name": "rec_rpc",
       "generator": "Visual Studio 15 2017 Win64",
-      "configurationType": "RelWithDebInfo",
+      "configurationType": "Release",
       "inheritEnvironments": [
         "msvc_x64_x64"
       ],
-      "buildRoot": "${env.USERPROFILE}\\Desktop\\build\\${name}",
-      "installRoot": "${env.USERPROFILE}\\Desktop\\install\\${name}",
+      "buildRoot": "${env.RECRPC64_DIR}\\build", 
+      "installRoot": "${env.RECRPC64_DIR}",
       "cmakeCommandArgs": "",
       "ctestCommandArgs": ""
     }
