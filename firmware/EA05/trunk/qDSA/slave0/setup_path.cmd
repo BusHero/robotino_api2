@@ -1,0 +1,1 @@
+set PATH=%PATH%;C:\WinAVR\utils\bin\;C:\WinAVR\bin;C:\WinAVR\avr\bin;C:\WinAVR\libexec\gcc\avr\3.4.6

@@ -1,0 +1,8 @@
+[Unit]
+Description="robotino3-firmware"
+
+[Service]
+ExecStart=/usr/local/robotino/firmware/install.sh
+Restart=no
+
+[Install]

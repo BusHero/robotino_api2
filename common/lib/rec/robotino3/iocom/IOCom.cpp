@@ -322,7 +322,7 @@ void IOCom::parse_i( rec::robotino3::serialio::TagPointer p )
 	case TAG_FESTOOL_CHARGER_INFO:
 		{
 			rec::robotino3::iocom::tag::FestoolChargerInfoPointer p2 = p.staticCast<rec::robotino3::iocom::tag::FestoolChargerInfo>();
-			festoolChargerInfoCb(p2->time(),p2->accuLoading(),p2->accuConnected(),p2->externalPower(),p2->chargerConnected(),p2->voltages(),p2->capacities(),p2->message());
+			festoolChargerInfoCb(p2->time(), p2->accuLoading(),p2->accuConnected(),p2->externalPower(),p2->chargerConnected(),p2->voltages(),p2->capacities(),p2->message());
 		}
 		break;
 
@@ -446,7 +446,7 @@ void IOCom::gyroDataCb( const unsigned int* stamps, const int stampsSize, const 
 void IOCom::gpainCb( int channel, float voltage ){}
 void IOCom::versionBitsCb( bool version0, bool version1 ){}
 void IOCom::gyroParamCb( float bias, float scale ){}
-void IOCom::festoolChargerInfoCb(unsigned int time, QVector<bool> accuLoading, QVector<bool> accuConnected, bool externalPower, bool chargerConnected, QVector<float> voltages, QVector<int> capacities,QString message){}
+void IOCom::festoolChargerInfoCb(QVector<unsigned int> time, QVector<bool> accuLoading, QVector<bool> accuConnected, QVector<bool> externalPower, QVector<bool> chargerConnected, QVector<float> voltages, QVector<int> capacities,QString message){}
 void IOCom::motorDebugCb(int motor, unsigned int startTime, int deltaTime, QVector<int> speeds, QVector<int> speed_setpoints, QVector<float> currents, QVector<int> control_points){}
 
 void IOCom::infoCb( const char* message ){}

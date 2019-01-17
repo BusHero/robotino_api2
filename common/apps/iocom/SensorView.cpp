@@ -301,8 +301,8 @@ SensorView::SensorView( QWidget* parent, Com* com )
 		SLOT( setGyroParam( float, float ) ) );
 	Q_ASSERT( ok );
 
-	ok = connect(_com, SIGNAL(festoolChargerInfo(unsigned int /*time*/, int /*loadingAccu*/, QVector<bool> /*accuConnected*/, bool /*externalPower*/, bool /*chargerConnected*/, QVector<float> /*voltages*/, QVector<int> /*capacities*/)),
-		SLOT(setFestoolChargerInfo(unsigned int /*time*/, int /*loadingAccu*/, QVector<bool> /*accuConnected*/, bool /*externalPower*/, bool /*chargerConnected*/, QVector<float> /*voltages*/, QVector<int> /*capacities*/)));
+	ok = connect(_com, SIGNAL(festoolChargerInfo(QVector<unsigned int> /*time*/, QVector<bool> /*accuLoading*/, QVector<bool> /*accuConnected*/, QVector<bool> /*externalPower*/, QVector<bool> /*chargerConnected*/, QVector<float> /*voltages*/, QVector<int> /*capacities*/, QString /*message*/)),
+		SLOT(setFestoolChargerInfo(QVector<unsigned int> /*time*/, QVector<bool> /*accuLoading*/, QVector<bool> /*accuConnected*/, QVector<bool> /*externalPower*/, QVector<bool> /*chargerConnected*/, QVector<float> /*voltages*/, QVector<int> /*capacities*/, QString /*message*/)));
 	Q_ASSERT(ok);
 
 	ok = connect(_com, SIGNAL(motorDebug(int /*motor*/, int /*startTime*/, int /*deltaTime*/, QVector<int> /*speeds*/, QVector<int> /*speed_setpoints*/, QVector<float> /*currents*/, QVector<int> /*control_points*/)),
@@ -593,14 +593,46 @@ void SensorView::setGyroParam( float bias, float scale )
 	item( ROW_GET_GYRO_PARAM, COL_VALUE )->setText( str );
 }
 
-void SensorView::setFestoolChargerInfo(unsigned int time, int loadingAccu, QVector<bool> accuConnected, bool externalPower, bool chargerConnected, QVector<float> voltages, QVector<int> capacities)
+void SensorView::setFestoolChargerInfo(QVector<unsigned int> time, QVector<bool> accuLoading, QVector<bool> accuConnected, QVector<bool> externalPower, QVector<bool> chargerConnected, QVector<float> voltages, QVector<int> capacities, QString message)
 {
-	QString str = QString("t:%1 l:%2 con:").arg(time).arg(loadingAccu);
+	QString str;
 	
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < time.size(); ++i)
 	{
-		str += QString(" %1").arg(accuConnected[i] ? 1 : 0);
+		str += QString("\n time %1: %2").arg(i).arg(time[i]);
 	}
+
+	for (int i = 0; i < accuLoading.size(); ++i)
+	{
+		str += QString("\n %1 %2").arg(i).arg(accuLoading[i] ? "loading" : "not loading");
+	}
+
+	for (int i = 0; i < accuConnected.size(); ++i)
+	{
+		str += QString("\n %1 %2").arg(i).arg(accuConnected[i] ? "connected" : "not connected");
+	}
+
+	for (int i = 0; i < externalPower.size(); ++i)
+	{
+		str += QString("\n %1 %2").arg(i).arg(externalPower[i] ? "external power" : "no external power");
+	}
+
+	for (int i = 0; i < chargerConnected.size(); ++i)
+	{
+		str += QString("\n %1 %2").arg(i).arg(chargerConnected[i] ? "charger connected" : "charger not connected");
+	}
+
+	for (int i = 0; i < voltages.size(); ++i)
+	{
+		str += QString("\n voltage %1: %2").arg(i).arg(voltages[i]);
+	}
+
+	for (int i = 0; i < capacities.size(); ++i)
+	{
+		str += QString("\n capacity %1: %2").arg(i).arg(capacities[i]);
+	}
+
+	str += "\n" + message;
 	
 	item(ROW_FESTOOL_CHARGER_INFO, COL_VALUE)->setText(str);
 }

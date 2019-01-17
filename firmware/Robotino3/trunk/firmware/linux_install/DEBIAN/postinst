@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+	if [ -d /etc/systemd ] ; then
+		service udev restart
+		service controld3 stop
+		sleep 1
+		/usr/local/robotino/daemons/bin/controld3 -enterBootloader
+	else
+		restart udev
+		sleep 1
+		killall controld3 || true
+		sleep 1
+		/usr/local/robotino/daemons/bin/controld3 -enterBootloader
+	fi
+fi

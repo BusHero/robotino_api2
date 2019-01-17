@@ -1,0 +1,127 @@
+#include "@INSTALL_DIR@\trash\version.h"
+#define INSTALLDIR "@INSTALL_DIR@"
+
+#define MyCompany "REC GmbH"
+#define MyAppName "Robotino Grappler firmware update"
+#define MyAppExeName "grappler_firmware_updater.exe"
+
+[Setup]
+AppId={#MyAppName}
+AppName={#MyAppName}
+AppVerName={#MyAppName} {#MAJOR}.{#MINOR}.{#PATCH}
+AppPublisher=Festo Didactic GmbH & Co. KG
+AppPublisherURL=http://www.openrobotino.org
+AppSupportURL=http://www.openrobotino.org
+AppUpdatesURL=http://www.openrobotino.org
+DefaultDirName={pf}\REC GmbH\RobotinoGrapplerFirmwareUpdate
+UsePreviousAppDir=yes
+DefaultGroupName="REC GmbH"
+UninstallDisplayIcon={app}\bin\{#MyAppExeName}
+UninstallDisplayName={#MyAppName} (Uninstall)
+AlwaysShowDirOnReadyPage=true
+AlwaysShowGroupOnReadyPage=true
+OutputBaseFilename=RobotinoGrapplerFirmwareUpdate-{#MAJOR}.{#MINOR}.{#PATCH}
+Compression=lzma
+SolidCompression=yes
+RestartIfNeededByRun=false
+ShowTasksTreeLines=true
+AllowNoIcons=true
+ChangesAssociations=yes
+ChangesEnvironment=yes
+
+[Languages]
+Name: en; MessagesFile: compiler:Default.isl;
+Name: de; MessagesFile: compiler:Languages\German.isl;
+
+[CustomMessages]
+en.msgbox_warning=An old installation of the firmware update has been detected. The old installation will be removed first.
+de.msgbox_warning=Es wurde eine alte Firmware-Updater Installation gefunden. Diese wird zunächst deinstalliert.
+en.InstallingUSBDriver=Installing USB driver for Robotino's grappler.
+de.InstallingUSBDriver=Installiere USB-Treiber für Robotinos Grappler.
+en.WillInstallUSBDrivers=Setup will now try to install the USB driver for Robotino's grappler. During this process, messages might appear that%nnotify you that the drivers you are about to install are not digitally signed and that it is not recommended to install them.%n%nHowever, if you want to communicate with your Robotino's grappler via USB, you will have to install those drivers.%nFor this purpose, click on the "Continue installation" button as soon as the dialog is shown.%n%nIf you decide not to install the drivers at this point, you can perform the installation later.
+de.WillInstallUSBDrivers=Setup wird nun versuchen, den USB-Treiber für Robotinos Grappler zu installieren. Dabei werden Ihnen möglicherweise%nMitteilungen angezeigt, die Sie darauf aufmerksam machen, dass die zu installierenden Treiber nicht digital signiert%nsind und von einer Installation abgeraten wird.%n%nWenn Sie mit Robotinos Grappler über USB kommunizieren wollen ist es jedoch erforderlich, diese%nTreiber zu installieren. Klicken Sie dazu auf "Installation fortsetzen", sobald der Dialog angezeigt wird.%n%nSollten Sie sich dazu entschließen, die Treiber nicht zu installieren, so können Sie dies zu einem späteren%nZeitpunkt nachholen.
+
+
+[Files]
+Source: {#INSTALLDIR}\*.*; DestDir: {app}; Flags: ignoreversion recursesubdirs; Excludes: trash
+Source: {#INSTALLDIR}\trash\vcredist_x86.exe; DestDir: {tmp}
+
+[Icons]
+Name: {group}\{#MyAppName}; Filename: {app}\bin\{#MyAppExeName}
+
+[Run]
+Filename: {app}\bin\{#MyAppExeName}; Description: {cm:LaunchProgram,{#MyAppName}}; Flags: nowait postinstall skipifsilent; WorkingDir: {app}\bin
+Filename: {tmp}\vcredist_x86.exe; Parameters: "/q"; StatusMsg: Installing Redistributable Package for Visual C++.
+Filename: {app}\driver\x86\DPInst_x86.exe; Parameters: /lm /sw; WorkingDir: {app}\driver\x86; StatusMsg: {cm:InstallingUSBDriver}; Check: Install32BitUSBDriver
+Filename: {app}\driver\x64\DPInst_x64.exe; Parameters: /lm /sw; WorkingDir: {app}\driver\x64; StatusMsg: {cm:InstallingUSBDriver}; Check: Install64BitUSBDriver
+
+[Code]
+function IsOldWindows: Boolean;
+var
+	WinVer: Cardinal;
+begin
+	WinVer := GetWindowsVersion() shr 16;
+	if WinVer < $0600 then
+	begin
+		Result := True;
+	end else begin
+		Result := False;
+	end;
+end;
+
+function InitializeSetup: Boolean;
+var
+	Uninstall: String;
+begin
+	Result:= True;
+	
+	if RegQueryStringValue(HKLM, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppName}_is1', 'UninstallString', Uninstall) then
+	begin
+		MsgBox( ExpandConstant('{cm:msgbox_warning}'), mbInformation, MB_YESNO );
+	end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+var
+	ResultCode: Integer;
+	Uninstall: String;
+begin
+	if (CurStep = ssInstall) then begin
+		if RegQueryStringValue(HKLM, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppName}_is1', 'UninstallString', Uninstall) then begin
+			Exec(RemoveQuotes(Uninstall), ' /SILENT', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+		end;
+	end;
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+var
+	appdir:			String;
+begin
+	appdir := ExpandConstant('{app}')
+	if CurUninstallStep = usUninstall then begin
+	end;
+end;
+
+function Install32BitUSBDriver: Boolean;
+begin
+	//Result := DoInstallUSBCortexM3Driver;
+	//if (Result) then begin
+		Result := (not IsWin64);
+
+		if (Result) then begin
+			SuppressibleMsgBox(Format(CustomMessage('WillInstallUSBDrivers'), [ExpandConstant('{app}')]), mbInformation, MB_OK, MB_OK);
+		end;
+	//end;
+end;
+
+function Install64BitUSBDriver: Boolean;
+begin
+	//Result := DoInstallUSBCortexM3Driver;
+	//if (Result) then begin
+		Result := IsWin64;
+
+		if (Result) then begin
+			SuppressibleMsgBox(Format(CustomMessage('WillInstallUSBDrivers'), [ExpandConstant('{app}')]), mbInformation, MB_OK, MB_OK);
+		end;
+	//end;
+end;

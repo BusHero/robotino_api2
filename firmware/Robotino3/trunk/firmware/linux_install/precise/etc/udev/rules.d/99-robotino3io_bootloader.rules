@@ -1,0 +1,1 @@
+SUBSYSTEM=="block", KERNEL=="sd?", ATTRS{idVendor}=="1e29", ATTRS{idProduct}=="040e", NAME="robotino3io_bootloader", SYMLINK+="robotino3io_bootloader", RUN+="/usr/local/robotino/firmware/install.sh"

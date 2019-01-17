@@ -178,22 +178,30 @@ int main( int argc, char** argv )
 	case ListCommand:
 		{
 			client = new Client( timeout );
-			QStringList topics = client->allTopics();
+			QSet<QString> topics = QSet<QString>::fromList(client->allTopics());
 			delete client;
 			client = NULL;
 
+			QStringList output;
 			QRegExp regExp( QString( ".*%1.*" ).arg(listRegExp) );
-			Q_FOREACH( const QString& str, topics )
+			for(QSet<QString>::const_iterator iter = topics.constBegin(); topics.constEnd()!=iter; ++iter)
 			{
-				if( false == str.endsWith( "_info" ) )
+				const QString& str = *iter;
+				if( topics.contains(str+"_info") )
 				{
 					QString s = str;
 					s.remove( "rec_robotino_rpc_" );
 					if( listRegExp.isEmpty() || regExp.exactMatch( s ) )
 					{
-						std::cout << s.toLatin1().constData() << std::endl;
+						output << s;
 					}
 				}
+			}
+
+			output.sort();
+			Q_FOREACH(const QString& str, output)
+			{
+				std::cout << str.toLatin1().constData() << std::endl;
 			}
 		}
 		return 0;

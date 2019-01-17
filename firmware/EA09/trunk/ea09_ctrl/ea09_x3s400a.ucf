@@ -1,0 +1,114 @@
+# EA09 - BOARD
+# FPGA - CONSTRAINTS for Spartan3x400A
+
+# 	external 48MHz Mhz Oscillator
+#
+NET "CLK_IN" LOC = "N9" ;
+
+#	EMC-Interface-Signals (to LPC2377)
+# 	NOTE: "CE_N" corresponds to LP2378s pin "CS_N_0"
+#
+NET "CE_N" 			LOC = "F14" ;
+NET "OE_N" 			LOC = "D12" ;
+NET "WE_N" 			LOC = "D6" ;
+NET "IO<7>"  		LOC = "E13" ;	
+NET "IO<6>"  		LOC = "E14" ;
+NET "IO<5>"  		LOC = "D16" ;
+NET "IO<4>"  		LOC = "D15" ;
+NET "IO<3>"  		LOC = "C16" ;
+NET "IO<2>"  		LOC = "C15" ;
+NET "IO<1>"  		LOC = "D13" ;
+NET "IO<0>"  		LOC = "C13" ;
+#NET "A<5>"  		LOC = "K16" ;
+#NET "A<4>"  		LOC = "J16" ;	
+NET "A<3>"  		LOC = "K15" ;
+NET "A<2>"  		LOC = "K14" ;
+NET "A<1>"  		LOC = "J12" ;
+NET "A<0>"  		LOC = "J13" ;
+
+#	Motor: Encoder
+#
+NET "ENC_A<3>"  		LOC = "K4" ;
+NET "ENC_A<2>"  		LOC = "L1" ;
+NET "ENC_A<1>"  		LOC = "K1" ;
+NET "ENC_A<0>"  		LOC = "J1" ;	
+NET "ENC_B<3>"  		LOC = "L3" ;
+NET "ENC_B<2>"  		LOC = "L2" ;
+NET "ENC_B<1>"  		LOC = "K3" ;
+NET "ENC_B<0>"  		LOC = "J2" ;	
+
+#	Motor: Thermal Flags
+#
+#NET "M_THFLAGS<3>"  		LOC = "N2" ;
+#NET "M_THFLAGS<2>"  		LOC = "N1" ;
+#NET "M_THFLAGS<1>"  		LOC = "M1" ;
+#NET "M_THFLAGS<0>"  		LOC = "M3" ;	
+ 
+#	Motor: Brakes
+#
+#NET "M_BRAKES<3>"  		LOC = "T5" ;
+#NET "M_BRAKES<2>"  		LOC = "N7" ;
+#NET "M_BRAKES<1>"  		LOC = "R5" ;
+#NET "M_BRAKES<0>"  		LOC = "T4" ;	
+
+#	Digital IOs
+#	DI
+NET "DI<7>"  		LOC = "A3" ;	
+NET "DI<6>"  		LOC = "A5" ;
+NET "DI<5>"  		LOC = "B4" ;
+NET "DI<4>"  		LOC = "C5" ;
+NET "DI<3>"  		LOC = "A4" ;
+NET "DI<2>"  		LOC = "B3" ;
+NET "DI<1>"  		LOC = "C4" ;
+NET "DI<0>"  		LOC = "E6" ;
+
+#	DO	
+#NET "DO<7>"  		LOC = "G2" ;	
+#NET "DO<6>"  		LOC = "G1" ;
+#NET "DO<5>"  		LOC = "E2" ;
+#NET "DO<4>"  		LOC = "F1" ;
+#NET "DO<3>"  		LOC = "D1" ;
+#NET "DO<2>"  		LOC = "E1" ;
+#NET "DO<1>"  		LOC = "C2" ;
+#NET "DO<0>"  		LOC = "C1" ;
+
+#	RELAY	
+NET "RELAY<1>"  	LOC = "H1" ;
+NET "RELAY<0>"  	LOC = "H3" ;	
+
+#power on
+NET "POWER_ON" 	LOC = "L4" ;
+
+#	Extenders
+#	IO_A
+NET "PC_INIT"  	LOC = "N3" ;
+NET "PC_STROBE"  	LOC = "R1" ;
+NET "PC_ERR"  		LOC = "T9" ;
+NET "SLCT"  		LOC = "R7" ;
+NET "PE"  			LOC = "T7" ;
+NET "BUSY"  		LOC = "T8" ;
+NET "ACK"  			LOC = "J6" ;
+	
+#	IO_B
+NET "IO_B<7>"  		LOC = "T10" ;	
+NET "IO_B<6>"  		LOC = "P11" ;
+NET "IO_B<5>"  		LOC = "P12" ;
+NET "IO_B<4>"  		LOC = "R13" ;
+NET "IO_B<3>"  		LOC = "T13" ;
+NET "IO_B<2>"  		LOC = "P13" ;
+NET "IO_B<1>"  		LOC = "R15" ;
+NET "IO_B<0>"  		LOC = "P15" ;	
+
+
+#	LEDs
+#
+NET "ALIVE_LED"   LOC = "A12" ;
+
+NET "LED<2>"  		LOC = "A14" ;
+NET "LED<1>"  		LOC = "B14" ;
+NET "LED<0>"  		LOC = "A13" ;	
+
+NET "SPI1_E_SCK"		LOC = "K6" ;
+NET "SPI1_E_MISO"		LOC = "K5" ;
+NET "SPI1_E_SS"		LOC = "L6" ;
+NET "SPI1_E_MOSI"		LOC = "L5" ;		  

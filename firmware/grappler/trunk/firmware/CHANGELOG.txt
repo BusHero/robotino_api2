@@ -1,0 +1,4 @@
+Version 2.0.1:
+  New features:
+  Updates:
+  Bug fixes: Jumping servos after enable torque fixed

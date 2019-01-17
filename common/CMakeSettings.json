@@ -1,14 +1,14 @@
 ﻿{
   "configurations": [
     {
-      "name": "x64-Debug",
+      "name": "common",
       "generator": "Visual Studio 15 2017 Win64",
       "configurationType": "Release",
       "inheritEnvironments": [
         "msvc_x64_x64"
       ],
-      "buildRoot": "C:\\Users\\petru\\Desktop\\build\\common",
-      "installRoot": "C:\\Users\\petru\\Desktop\\install\\common",
+      "buildRoot": "C:\\robotino\\common\\build",
+      "installRoot": "C:\\robotino\\common",
       "cmakeCommandArgs": "",
       "ctestCommandArgs": ""
     }

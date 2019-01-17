@@ -7,8 +7,8 @@
       "inheritEnvironments": [
         "msvc_x64_x64"
       ],
-      "buildRoot": "${env.RECRPC64_DIR}\\build", 
-      "installRoot": "${env.RECRPC64_DIR}",
+      "buildRoot": "C:\\robotino\\rec_rpc\\build",
+      "installRoot": "C:\\robotino\\rec_rpc",
       "cmakeCommandArgs": "",
       "ctestCommandArgs": ""
     }

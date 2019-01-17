@@ -1,0 +1,12 @@
+Package: robotino-grappler-firmware
+Version: 2.0.1
+Section: base
+Priority: optional
+Architecture: i386
+Depends: openrobotino1 (>=1.8.33) | robotino-daemons, mtools
+Conflicts: robotinoarm-firmware
+Replaces: robotinoarm-firmware
+Maintainer: REC GmbH
+Description: Firmware Robotino arm
+ Firmware for the LPC2378
+

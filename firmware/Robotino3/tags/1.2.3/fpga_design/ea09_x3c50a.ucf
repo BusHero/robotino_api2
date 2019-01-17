@@ -1,0 +1,126 @@
+# EA09 - BOARD
+# FPGA - CONSTRAINTS for Spartan3x400A
+
+# 	external 48MHz Mhz Oscillator
+#
+NET "CLK_IN" LOC = "P83" ;
+
+#**************	EMC-Interface-Signals (to LPC2377) *************************
+# 	NOTE: "CE_N" corresponds to LP2378s pin "CS_N_0"
+#
+#CS_0 im Schaltplan
+NET "CE_N" 			LOC = "P29" ;
+
+# #RD im Schaltplan
+NET "OE_N" 			LOC = "P7" ;
+
+# #WR im Schaltplan
+NET "WE_N" 			LOC = "P21" ;
+
+# D0 bis D7 im Schaltplan
+NET "IO<7>"  		LOC = "P13" ;	
+NET "IO<6>"  		LOC = "P12" ;
+NET "IO<5>"  		LOC = "P10" ;
+NET "IO<4>"  		LOC = "P9" ;
+NET "IO<3>"  		LOC = "P6" ;
+NET "IO<2>"  		LOC = "P5" ;
+NET "IO<1>"  		LOC = "P4" ;
+NET "IO<0>"  		LOC = "P3" ;
+
+#NET "A<5>"  		LOC = "PK16" ;
+#NET "A<4>"  		LOC = "PJ16" ;	
+
+# AD0 bis AD3 im Schaltplan
+NET "A<3>"  		LOC = "P20" ;
+NET "A<2>"  		LOC = "P19" ;
+NET "A<1>"  		LOC = "P16" ;
+NET "A<0>"  		LOC = "P15" ;
+#
+#**************	EMC-Interface-Signals (to LPC2377) *************************
+
+#**************	Motor: Encoder *********************************************
+#
+NET "ENC_A<3>"  		LOC = "P62" ;
+NET "ENC_A<2>"  		LOC = "P65" ;
+NET "ENC_A<1>"  		LOC = "P71" ;
+NET "ENC_A<0>"  		LOC = "P73" ;	
+NET "ENC_B<3>"  		LOC = "P61" ;
+NET "ENC_B<2>"  		LOC = "P64" ;
+NET "ENC_B<1>"  		LOC = "P70" ;
+NET "ENC_B<0>"  		LOC = "P72" ;	
+#
+#**************	Motor: Encoder *********************************************
+
+NET "THFLG<3>"			LOC = "P60" ;
+NET "THFLG<2>"			LOC = "P59" ;
+NET "THFLG<1>"			LOC = "P57" ;
+NET "THFLG<0>"			LOC = "P56" ;
+
+#**************	Digital Inputs *********************************************
+#
+NET "DI<7>"  		LOC = "P68" ;	
+NET "DI<6>"  		LOC = "P39" ;
+NET "DI<5>"  		LOC = "P28" ;
+NET "DI<4>"  		LOC = "P50" ;
+NET "DI<3>"  		LOC = "P49" ;
+NET "DI<2>"  		LOC = "P44" ;
+NET "DI<1>"  		LOC = "P41" ;
+NET "DI<0>"  		LOC = "P40" ;
+#
+#**************	Digital Inputs *********************************************
+
+#**************	Digital Outputs ********************************************
+#	
+#am LPC P0_6-P0_9 und P2_6-P2_9
+#
+#**************	Digital Outputs ********************************************
+
+#**************	RELAY ******************************************************
+#
+NET "RELAY<1>"  	LOC = "P31" ;
+NET "RELAY<0>"  	LOC = "P30" ;	
+#
+#**************	RELAY ******************************************************
+
+#**************	power on ***************************************************
+#
+NET "POWER_ON"  		LOC = "P52" ;
+#
+#**************	power on ***************************************************
+
+#**************	Extenders **************************************************
+#
+NET "PC_INIT"  		LOC = "P77" ;
+NET "PC_STROBE"  		LOC = "P43" ;
+NET "PC_ERR"  		LOC = "P78" ;
+NET "SLCT"  		LOC = "P84" ;
+NET "PE"  		LOC = "P85" ;
+NET "BUSY"  		LOC = "P37" ;
+NET "ACK"  		LOC = "P36" ;
+	
+# PC_D0 bis PC_D7
+NET "IO_B<7>"  		LOC = "P86" ;	
+NET "IO_B<6>"  		LOC = "P88" ;
+NET "IO_B<5>"  		LOC = "P89" ;
+NET "IO_B<4>"  		LOC = "P90" ;
+NET "IO_B<3>"  		LOC = "P93" ;
+NET "IO_B<2>"  		LOC = "P94" ;
+NET "IO_B<1>"  		LOC = "P98" ;
+NET "IO_B<0>"  		LOC = "P99" ;
+
+NET "SPI1_E_SCK"		LOC = "P53" ;
+NET "SPI1_E_MISO"		LOC = "P46" ;
+NET "SPI1_E_SS"		LOC = "P27" ;
+NET "SPI1_E_MOSI"		LOC = "P51" ;
+
+#
+#**************	Extenders **************************************************
+
+
+#	LEDs
+#
+NET "ALIVE_LED"   LOC = "P35" ;
+
+NET "LED<2>"  		LOC = "P34" ;
+NET "LED<1>"  		LOC = "P33" ;
+NET "LED<0>"  		LOC = "P32" ;			  

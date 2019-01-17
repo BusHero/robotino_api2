@@ -1,0 +1,10 @@
+Package: robotino-firmware
+Version: 1.2.4
+Section: base
+Priority: optional
+Architecture: i386
+Depends: openrobotino1 (>=1.8.8) | robotino-daemons
+Maintainer: Christian Verbeek (verbeek@servicerobotics.eu)
+Description: Firmware EA09
+ Firmware for the LPC2378 and Xilinx Spartan 3 FPGA
+

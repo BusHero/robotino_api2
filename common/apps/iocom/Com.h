@@ -41,7 +41,7 @@ Q_SIGNALS:
 	void gpain( int channel, float voltage );
 	void versionBits( bool version0, bool version1 );
 	void gyroParam( float bias, float scale );
-	void festoolChargerInfo(unsigned int time, int loadingAccu, QVector<bool> accuConnected, bool externalPower, bool chargerConnected, QVector<float> voltages, QVector<int> capacities);
+	void festoolChargerInfo(QVector<unsigned int> time, QVector<bool> accuLoading, QVector<bool> accuConnected, QVector<bool> externalPower, QVector<bool> chargerConnected, QVector<float> voltages, QVector<int> capacities, QString message);
 	void motorDebug(int motor, int startTime, int deltaTime, QVector<int> speeds, QVector<int> speed_setpoints, QVector<float> currents, QVector<int> control_points);
 	void info( const QString& );
 	void warning( const QString& );
@@ -81,7 +81,7 @@ private:
 	void gpainCb( int channel, float voltage );
 	void versionBitsCb( bool version0, bool version1 );
 	void gyroParamCb( float bias, float scale );
-	void festoolChargerInfoCb(unsigned int time, int loadingAccu, QVector<bool> accuConnected, bool externalPower, bool chargerConnected, QVector<float> voltages, QVector<int> capacities);
+	void festoolChargerInfoCb(QVector<unsigned int> time, QVector<bool> accuLoading, QVector<bool> accuConnected, QVector<bool> externalPower, QVector<bool> chargerConnected, QVector<float> voltages, QVector<int> capacities, QString message);
 	void motorDebugCb(int motor, int startTime, int deltaTime, QVector<int> speeds, QVector<int> speed_setpoints, QVector<float> currents, QVector<int> control_points);
 	void infoCb( const char* message );
 	void warningCb( const char* message );

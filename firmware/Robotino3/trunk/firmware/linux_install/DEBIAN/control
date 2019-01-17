@@ -1,0 +1,11 @@
+Package: robotino4-firmware
+Version: @VERSION_STRING@
+Section: base
+Priority: optional
+Architecture: amd64
+Depends: mtools, robotino-daemons
+Replaces: robotino3-firmware
+Maintainer: REC GmbH
+Description: Firmware for Robotino4. Installation with USB bootloader
+@DETAILED_DESCRIPTION@
+

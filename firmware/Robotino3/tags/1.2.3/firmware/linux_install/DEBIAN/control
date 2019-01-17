@@ -1,0 +1,10 @@
+Package: robotino3-firmware
+Version: @VERSION_STRING@
+Section: base
+Priority: optional
+Architecture: amd64
+Depends: mtools, robotino-daemons
+Maintainer: REC GmbH
+Description: Firmware for Robotino3. Installation with USB bootloader
+@DETAILED_DESCRIPTION@
+

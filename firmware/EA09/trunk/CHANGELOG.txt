@@ -1,0 +1,84 @@
+Version 1.2.5:
+  Bug fixes:
+  - current measurement of the whole system works now
+
+Version 1.2.4:
+  New features:
+  - increase time power button has to pressed to shutdown Robotino from 2s to 5s if communication to iod had been performed
+  - send status of power button over serial line to make Linux react to this and initiate a system halt
+  
+Version 1.2.3:
+  Bug fixes:
+  - stop all motors when not receiving something over serial line for more than 200ms
+  
+Version 1.2.2:
+  Bug fixes:
+  - correctly encode version information and lower bytes of system current and battery voltage
+  
+Version 1.2.1:
+  Bug fixes:
+  - do not accept 0 as target position in order not to move if external program terminates or power output is not used
+  - ensure that position control can reach the upper and lower end-point positions
+  
+Version 1.2.0:
+  New features:
+  - use ea09cmd to enable position controller
+    Before using the position controller make sure that:
+    * DI1 and DI2 of Robotino's IO connector must be end-point sensors while DI1 senses the minimum and DI2 the maximum position
+    * At the endpoint positions DI1 and DI2 must show false in Robotino View
+    * Positive control points set at the power output functionblock must increase the encoder input position
+
+Version 1.0.8:
+  Bug fixes:
+  - motor current had been scaled down to much so that only 0 is displayed both in Robotino View and EA09com
+
+Version 1.0.7:
+  New features:
+  - switch off motors if speed set-point for all motors is 0 for more than 1s
+  - if power on button is pressed for a long time we assume to have a power on switch
+    and therefor shutdown power as soon as the power button is released
+  - Set 48MHz as clock source
+
+Version 1.0.6:
+  New features:
+  - telnet command "iodout" accepts bit pattern: "iodout 01001" is equivalent to
+                                               "iodout 0 0"
+                                               "iodout 1 1"
+                                               "iodout 2 0"
+                                               "iodout 3 0"
+                                               "iodout 4 1"
+  - telnet command "version" to print the current firmware version
+  Updates:
+  Bug fixes:
+
+Version 1.0.5:
+  New features:
+  Updates:
+  Bug fixes:
+  - do not negate dout settings
+  
+Version 1.0.4:
+  New features:
+  Updates:
+  Bug fixes:
+  - set elapsed time in data send via serial line
+
+Version 1.0.3:
+  New features:
+  - AD inputs are sampled with 1kHz
+  - Set IP address and netmask via serial line
+  - Set fpga power via serial line
+  - power off via serial line
+  Updates:
+  - FPGA power is not switched on at startup
+  Bug fixes:
+  - Battery voltage an system current are not transmitted via serial line
+  
+Version 1.0.2:
+  New features:
+  - Motor velocity controller with D part.
+  - Set PWM output to zero before changing direction.
+  Updates:
+  Bug fixes:
+  - 9th distance sensor not giving correct values
+  - Shutdown Robotino on signal via serial line

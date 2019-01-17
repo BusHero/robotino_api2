@@ -199,9 +199,9 @@ void Com::gyroParamCb( float bias, float scale )
 	Q_EMIT gyroParam( bias, scale );
 }
 
-void Com::festoolChargerInfoCb(unsigned int time, int loadingAccu, QVector<bool> accuConnected, bool externalPower, bool chargerConnected, QVector<float> voltages, QVector<int> capacities)
+void Com::festoolChargerInfoCb(QVector<unsigned int> time, QVector<bool> accuLoading, QVector<bool> accuConnected, QVector<bool> externalPower, QVector<bool> chargerConnected, QVector<float> voltages, QVector<int> capacities, QString message)
 {
-	Q_EMIT festoolChargerInfo(time, loadingAccu, accuConnected, externalPower, chargerConnected, voltages, capacities);
+	Q_EMIT festoolChargerInfo(time, accuLoading, accuConnected, externalPower, chargerConnected, voltages, capacities, message);
 }
 
 void Com::motorDebugCb(int motor, int startTime, int deltaTime, QVector<int> speeds, QVector<int> speed_setpoints, QVector<float> currents, QVector<int> control_points)

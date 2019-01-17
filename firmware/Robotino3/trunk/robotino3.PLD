@@ -1,0 +1,86 @@
+/* **************** IO-Pal fuer Cleanprotect (Neue Version) *********** */
+
+NAME		robotino3;
+PARTNO		IC5;
+REVISION	01;
+DATE		02.05.01;
+DESIGNER	ILNSEHER;
+COMPANY		ILNSEHER ELECTRONIC;
+ASSEMBLY	None;   
+LOCATION	None;
+DEVICE		G16V8;
+
+/* ******************** Inputs **************************************** */
+
+PIN  1 = CLK_IN1;     /* PAL_CLK_IN VON PIN 15                          */
+PIN  2 = 5V_HELP_AKT; /* TASTER IST GEDUECKT                            */
+PIN  3 = EXT_PWR_AKT;  /* EXTERNES NETZTEIL IST ANGESCHLOSSEN            */
+PIN  4 = FPGA_ON;     /* BAT1_ON _FPGA                                  */
+PIN  5 = BATT_A0;     /* BATT1_ON BATT_A0                               */
+PIN  6 = BATT_A1;     /* BATT2_ON BATT_A1                               */
+PIN  7 = BATT3_ON;    /* BATT3_ON                                       */
+PIN  8 = GAL_OUT;     /* AUSGANG VON LPC                                */
+PIN  9 = RESET;       /* AUSGANG VON APX809 (#RESET)                    */
+
+/* ******************** Outputs *************************************** */
+
+PIN 19 = MOS_ON_24V;  /* EXTERNES POWER-SUPPLY ON                       */
+PIN 18 = MOS_ON_BATT1;/* AKKU 1 ON                                      */
+PIN 17 = MOS_ON_BATT2;/* AKKU 2 ON                                      */
+PIN 16 = MOS_ON_BATT3;/* AKKU 3 ON                                      */
+PIN 15 = CLK_OUT;     /* PAL_CLK_OUT ZU PIN 1                           */
+PIN 14 = SPARE1;      /* SPARE1-IO                                      */
+PIN 13 = SPARE2;      /* SPARE2-IO                                      */
+PIN 12 = SPARE3;      /* SPARE3-IO                                      */
+PIN 11 = SPARE4;      /* SPARE4 IMMER AUF GND                           */
+
+/* ******************** Gleichungen *********************************** */
+
+
+/* **** 24V = ADRESSE 0 ****  */
+FIELD ADR = [BATT_A0, BATT_A1];
+
+
+
+
+
+/* **** EXT. PWR = ADRESSE 0 ****  */
+/* Wenn externes NT angeschlossen ist, dann ist immer NT der Einspeiser */
+
+MOS_ON_24V =      5V_HELP_AKT & EXT_PWR_AKT
+                # EXT_PWR_AKT & RESET & !ADR:[0];
+
+
+/* **** BATT1 = ADRESSE 1 ****  */
+/* Beim Einschalten wird immer BATT1 genommen, ausser NT ist aktiv */
+
+MOS_ON_BATT1 =    5V_HELP_AKT & !EXT_PWR_AKT
+               # !EXT_PWR_AKT & RESET & ADR:[3];
+
+
+/* **** BATT2 = ADRESSE 2 ****  */
+/* BATT2 kann nur durch Umschalten durch den Prozessor aktiviert werden */
+
+MOS_ON_BATT2 =   !EXT_PWR_AKT & !5V_HELP_AKT & RESET & ADR:[2];
+
+
+/* **** BATT3 = ADRESSE 3 ****  */
+/* BATT3 kann nur durch Umschalten durch den Prozessor aktiviert werden */
+
+MOS_ON_BATT3 =   !EXT_PWR_AKT & !5V_HELP_AKT & RESET & ADR:[1];
+
+
+
+
+
+
+/* ******************** File - Ende *********************************** */
+
+/* Bei PWR-On gilt: immer Batt 1 aktivieren */
+/* Falls ext.-PWR aktiv, immer 24V aktivieren */
+/* Batt 2 oder 3 koennen nur vom Prozessor aktiviert werden, wenn ext.PWR */
+/* nicht aktiv, oder PWR-ON aktiv */
+
+
+
+

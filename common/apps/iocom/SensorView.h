@@ -51,7 +51,7 @@ public Q_SLOTS:
 	void setGpain( int, float );
 	void setVersionBits( bool, bool );
 	void setGyroParam( float bias, float scale );
-	void setFestoolChargerInfo(unsigned int time, int loadingAccu, QVector<bool> accuConnected, bool externalPower, bool chargerConnected, QVector<float> voltages, QVector<int> capacities);
+	void setFestoolChargerInfo(QVector<unsigned int> /*time*/, QVector<bool> /*accuLoading*/, QVector<bool> /*accuConnected*/, QVector<bool> /*externalPower*/, QVector<bool> /*chargerConnected*/, QVector<float> /*voltages*/, QVector<int> /*capacities*/, QString /*message*/);
 	void setMotorDebug(int motor, int startTime, int deltaTime, QVector<int> speeds, QVector<int> speed_setpoints, QVector<float> currents, QVector<int> control_points);
 
 private Q_SLOTS:
