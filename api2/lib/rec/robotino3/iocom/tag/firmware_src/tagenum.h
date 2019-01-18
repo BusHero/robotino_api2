@@ -96,27 +96,57 @@ typedef enum {
 	TAG_FESTOOL_CHARGER_INFO = 98,
 	/*
 	Byte  Bit   Description
-	0-3   0-31  Time
-	4           Accu load
+	0-3         Time Charger 0
+	4-7					Time Charger 1
+	8           Accu load
 	      0     High -> Accu 0 is loading
 				1     High -> Accu 1 is loading
 				2     High -> Accu 2 is loading
 				3     High -> Accu 3 is loading
-				4     High -> Accu 0 is connected to system
-				5     High -> Accu 1 is connected to system
-				6     High -> Accu 2 is connected to system
-				7     High -> Accu 3 is connected to system
-	5
-				0			High -> External power active
-				1			High -> Charger present
-	6-7   0-15  Accu 0 voltage in mV
-	8-9   0-15  Accu 1 voltage in mV
-	10-11   0-15  Accu 2 voltage in mV
-	12-13 0-15  Accu 3 voltage in mV
-	14					Accu 0 capacity in %
-	15					Accu 1 capacity in %
-	16					Accu 2 capacity in %
-	17					Accu 3 capacity in %
+		    4     High -> Accu 4 is loading
+				5     High -> Accu 5 is loading
+				6     High -> Accu 6 is loading
+				7     High -> Accu 7 is loading
+	9
+				0     High -> Accu 0 is connected to system
+				1     High -> Accu 1 is connected to system
+				2     High -> Accu 2 is connected to system
+				3     High -> Accu 3 is connected to system
+				4     High -> Accu 4 is connected to system
+				5     High -> Accu 5 is connected to system
+				6     High -> Accu 6 is connected to system
+				7     High -> Accu 7 is connected to system
+	10
+				0			High -> Charger 0 External power active
+				1			High -> Charger 0 Charger present
+				2			High -> Charger 0 Battery Low
+				3
+				4			High -> Charger 1 External power active
+				5			High -> Charger 1 Charger present
+				6			High -> Charger 1 Battery Low
+				7
+	11-12 0-15  Accu 0 voltage in mV
+	13-14 0-15  Accu 1 voltage in mV
+	15-16 0-15  Accu 2 voltage in mV
+	17-18 0-15  Accu 3 voltage in mV
+	19-20 0-15  Accu 4 voltage in mV
+	21-22 0-15  Accu 5 voltage in mV
+	23-24 0-15  Accu 6 voltage in mV
+	25-26 0-15  Accu 7 voltage in mV
+	27					Accu 0 capacity in %
+	28					Accu 1 capacity in %
+	29					Accu 2 capacity in %
+	30					Accu 3 capacity in %
+	31					Accu 4 capacity in %
+	32					Accu 5 capacity in %
+	33					Accu 6 capacity in %
+	34					Accu 7 capacity in %
+	35					later use
+	36					later use
+	37					later use
+	38					later use
+	39					later use
+	40					later use
 	...					Messages
 	*/
 	

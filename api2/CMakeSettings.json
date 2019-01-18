@@ -1,14 +1,14 @@
 ﻿{
   "configurations": [
     {
-      "name": "x64-Debug",
+      "name": "api2",
       "generator": "Visual Studio 15 2017 Win64",
       "configurationType": "Release",
       "inheritEnvironments": [
         "msvc_x64_x64"
       ],
-      "buildRoot": "C:\\Users\\petru\\Desktop\\build\\api2",
-      "installRoot": "C:\\Users\\petru\\Desktop\\install\\api2",
+      "buildRoot": "C:\\robotino\\${name}\\build",
+      "installRoot": "C:\\robotino\\${name}",
       "cmakeCommandArgs": "",
       "ctestCommandArgs": ""
     }

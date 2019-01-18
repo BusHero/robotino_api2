@@ -1,6 +1,8 @@
-const char* versionstr = "2.0.2";
+const char* versionstr = "2.1.0";
 
-/**2.0.2 with Festool charger firmware 2.0.6
+/**2.1.0 with Festool charger firmware 2.1.2
+Support for 2 Festool charger boards
+2.0.2 with Festool charger firmware 2.0.6
 2.0.1 with Festool charger firmware 2.0.5
 Remove Ethernet with UDP PID controller debugging
 2.0.0 Added support for Festool charger

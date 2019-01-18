@@ -1,5 +1,3 @@
-
-MESSAGE("NAME:robotino3")
 ADD_SUBDIRECTORY( serialio )
 ADD_SUBDIRECTORY( iocom )
 ADD_SUBDIRECTORY( grippercom )

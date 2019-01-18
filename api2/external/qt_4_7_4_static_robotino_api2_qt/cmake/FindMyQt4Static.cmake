@@ -15,15 +15,14 @@ ENDIF( CMAKE_SIZEOF_VOID_P EQUAL 8 )
   
 IF( WIN32 )
 	#check for Visual Studio 2010
-	#IF( MSVC10 )
-	#	SET( ARCH ${ARCH}_vc100 )
-	#	#check for Visual Studio 2010
-	#ELSEIF( MSVC12 )
-	#	SET( ARCH ${ARCH}_vc120 )
-	#ELSE( MSVC10 )
-	#	MESSAGE( FATAL_ERROR "unknown VS compiler version." )
-	#ENDIF( MSVC10 )
-	SET (ARCH ${ARCH}_vc150)
+	IF( MSVC10 )
+		SET( ARCH ${ARCH}_vc100 )
+		#check for Visual Studio 2010
+	ELSEIF( MSVC12 )
+		SET( ARCH ${ARCH}_vc120 )
+	ELSE( MSVC10 )
+		MESSAGE( FATAL_ERROR "unknown VS compiler version." )
+	ENDIF( MSVC10 )
 ENDIF( WIN32 )
 
 SET( QT_STATIC 1 )

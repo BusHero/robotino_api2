@@ -104,7 +104,7 @@ namespace rec
 				virtual void gpainCb( int channel, float voltage );
 				virtual void versionBitsCb( bool version0, bool version1 );
 				virtual void gyroParamCb( float bias, float scale );
-				virtual void festoolChargerInfoCb( unsigned int time, QVector<bool> accuLoading, QVector<bool> accuConnected, bool externalPower, bool chargerConnected, QVector<float> voltages, QVector<int> capacities, QString message );
+				virtual void festoolChargerInfoCb( QVector<unsigned int> time, QVector<bool> accuLoading, QVector<bool> accuConnected, QVector<bool> externalPower, QVector<bool> chargerConnected, QVector<float> voltages, QVector<int> capacities, QString message );
 				virtual void motorDebugCb(int motor, unsigned int startTime, int deltaTime, QVector<int> speeds, QVector<int> speed_setpoints, QVector<float> currents, QVector<int> control_points);
 				virtual void infoCb( const char* message );
 				virtual void warningCb( const char* message );

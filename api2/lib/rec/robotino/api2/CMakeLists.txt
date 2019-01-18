@@ -3,8 +3,6 @@ SET(
 	rec_robotino_api2
 )
 
-MESSAGE("NAME:${NAME}")
-
 INCLUDE_DIRECTORIES(
 	${CMAKE_CURRENT_BINARY_DIR}
 )

@@ -80,7 +80,7 @@ void producer_read_buffer( unsigned char** p, unsigned short* length )
 {
 	static unsigned int pb_charger_info_time[3] = {0,0,0};
 	static unsigned char charger_version_seq[3] = {0,0,0};
-	static unsigned int festool_charger_time = 0;
+	static unsigned int festool_charger_time[2] = {0,0};
 
 	int i=0;
 
@@ -112,9 +112,11 @@ void producer_read_buffer( unsigned char** p, unsigned short* length )
 		}
 	}
 	
-	if( festool_charger_time != festool_charger_info.time )
+	if( festool_charger_time[0] != festool_charger_info.time[0]
+			|| festool_charger_time[1] != festool_charger_info.time[1] )
 	{
-		festool_charger_time = festool_charger_info.time;
+		festool_charger_time[0] = festool_charger_info.time[0];
+		festool_charger_time[1] = festool_charger_info.time[1];
 		produce_festool_charger_info();
 	}
 
@@ -192,45 +194,63 @@ void produce_festool_charger_info( void )
 		buffer[buflength] = ret;
 	}
 	
-	if( tlv_producer_check_overrun( 2+18+buflength ) )
+	if( tlv_producer_check_overrun( 2+41+buflength ) )
 	{
 		return;
 	}
 	
 	tlv_producer_write_payload( TAG_FESTOOL_CHARGER_INFO );
-	tlv_producer_write_payload( 18+buflength );
+	tlv_producer_write_payload( 41+buflength );
 	
-	tlv_producer_write_payload_uint32(festool_charger_info.time);
+	tlv_producer_write_payload_uint32(festool_charger_info.time[0]);
+	tlv_producer_write_payload_uint32(festool_charger_info.time[1]);
 	
 	ch = 0;
-	for(i=0; i<4; ++i)
+	for(i=0; i<8; ++i)
 	{
 		if(festool_charger_info.akku_load[i])
 		{
 			setBit(ch,i);
 		}
-		
+	}
+	tlv_producer_write_payload( ch );
+	
+	ch = 0;
+	for(i=0; i<8; ++i)
+	{	
 		if(festool_charger_info.akku_on[i])
 		{
-			setBit(ch,(i+4));
+			setBit(ch,(i));
 		}
 	}
 	tlv_producer_write_payload( ch );
 	
 	ch=0;
-	if(festool_charger_info.ext_power) setBit(ch,0);
-	if(festool_charger_info.charger_present) setBit(ch,1);
+	if(festool_charger_info.ext_power[0]) setBit(ch,0);
+	if(festool_charger_info.charger_present[0]) setBit(ch,1);
+	if(festool_charger_info.isBatteryLow[0]) setBit(ch,2);
+	
+	if(festool_charger_info.ext_power[1]) setBit(ch,4);
+	if(festool_charger_info.charger_present[1]) setBit(ch,5);
+	if(festool_charger_info.isBatteryLow[1]) setBit(ch,6);
 	tlv_producer_write_payload( ch );
 	
-	for(i=0; i<4; ++i)
+	for(i=0; i<8; ++i)
 	{
 		tlv_producer_write_payload_uint16(festool_charger_info.batteryVoltage[i]);
 	}
 	
-	for(i=0; i<4; ++i)
+	for(i=0; i<8; ++i)
 	{
 		tlv_producer_write_payload(festool_charger_info.batteryCapacity[i]);
 	}
+	
+	tlv_producer_write_payload( 0 );
+	tlv_producer_write_payload( 0 );
+	tlv_producer_write_payload( 0 );
+	tlv_producer_write_payload( 0 );
+	tlv_producer_write_payload( 0 );
+	tlv_producer_write_payload( 0 );
 	
 	for(i=0; i<buflength; ++i)
 	{
@@ -602,7 +622,16 @@ void produce_power_source_readings( void )
 	tlv_producer_write_payload_float( current ); //Power source current 
 	tlv_producer_write_payload( io_is_ext_power() ); //External power supply connected
 	tlv_producer_write_payload( num_charger ); //Power source temperature 
-	tlv_producer_write_payload( (num_charger>1?1:0) ); //battery type 0:Pb 1:NiMH
+	
+	if( festool_charger_info.time[0]>0 || festool_charger_info.time[1]>0 )
+	{
+		tlv_producer_write_payload(2); //2:Li-Ion
+	}
+	else
+	{
+		tlv_producer_write_payload( (num_charger>1?1:0) ); //battery type 0:Pb 1:NiMH
+	}
+	
 	tlv_producer_write_payload( charger_is_battery_low() ); //State of charge 
 	tlv_producer_write_payload_uint32( charger_battery_low_count() ); //Error
 }

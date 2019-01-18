@@ -55,7 +55,7 @@ extern unsigned int globalTime( void );
 
 pb_charger_info_st pb_charger_info_array[3] = { {0,}, {0,}, {0,} };
 pb_charger_error_st pb_charger_error_array[3] = { {0,}, {0,}, {0,} };
-festool_charger_info_st festool_charger_info = {0,{0,0,0,0},{0,0,0,0},0,0,0,{0,0,0,0},{0,0,0,0},{0,0,0,0},0};
+festool_charger_info_st festool_charger_info = {{0,0},{-1,-1},{0,0,0,0,0,0,0,0},{0,0},{0,0},{0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{-2,-2,-2,-2,-2,-2,-2,-2},{0,0}};
 charger_version_st charger_version_array[3] = { {0,0,0,0}, {0,0,0,0}, {0,0,0,0} }; 
 
 #define charger_state_string_count 13
@@ -575,46 +575,60 @@ void charger_update( void )
 			break;
 		
 		case 0x601:
-			festool_charger_info.time = dst.data[0];
-			festool_charger_info.time |= dst.data[1] << 8;
+		case 0x621:
+			chargerid=(dst.id-0x601) >> 5;
 		
-			for(i=0;i<4;i++)
-			{
-				festool_charger_info.akku_sel[i] = 0;
-			}
+			festool_charger_info.time[chargerid] = dst.data[0];
+			festool_charger_info.time[chargerid] |= dst.data[1] << 8;
+		
+			festool_charger_info.akku_sel[chargerid] = dst.data[2];
 			
-			if(dst.data[2] & 0x1) //akku_sel_enabled
+			for(i=0;i<8;i++)
 			{
-				festool_charger_info.akku_sel[((dst.data[2] >> 1) & 0x3)] = 1;
-			}
-			
-			for(i=0;i<4;i++)
-			{
-				festool_charger_info.akku_load[i] = ((dst.data[2] >> (3+i)) & 0x1);
+				festool_charger_info.akku_load[i] = bitIsSet(dst.data[3],i);
 			}
 		
-			festool_charger_info.ext_power = (dst.data[3] & 0x1);
-			festool_charger_info.charger_present = ((dst.data[3] >> 1) & 0x1);
-			festool_charger_info.mos_on_batt1 = ((dst.data[3] >> 2) & 0x1);
+			festool_charger_info.ext_power[chargerid] = bitIsSet( dst.data[4],0 );
+			festool_charger_info.charger_present[chargerid] = bitIsSet( dst.data[4],1 );
+			festool_charger_info.mos_on_batt1[chargerid] = bitIsSet( dst.data[4],2 );
+			festool_charger_info.isBatteryLow[chargerid] = bitIsSet( dst.data[4],3 );
 			
 			for(i=0;i<4;i++)
 			{
-				festool_charger_info.akku_on[i] = ((dst.data[3] >> (3+i)) & 0x1);
+				festool_charger_info.akku_on[i+chargerid*4] = bitIsSet(dst.data[5],i);
 			}
 			
-			festool_charger_info.isBatteryLow = ((dst.data[3] >> 7) & 0x1);
-		
-			for(i=0;i<4;i++)
-			{
-				festool_charger_info.batteryCapacity[i] = dst.data[4+i];
-			}
 			break;
 		
 		case 0x602:
+		case 0x622:
+			chargerid=(dst.id-0x602) >> 5;
+		
 			for(i=0;i<4;i++)
 			{
-				festool_charger_info.batteryVoltage[i] = dst.data[2*i];
-				festool_charger_info.batteryVoltage[i] |= (dst.data[2*i+1] << 8);
+				festool_charger_info.batteryVoltage[i+chargerid*4] = dst.data[2*i];
+				festool_charger_info.batteryVoltage[i+chargerid*4] |= (dst.data[2*i+1] << 8);
+			}
+			break;
+			
+		case 0x603:
+		case 0x623:
+			chargerid=(dst.id-0x603) >> 5;
+		
+			for(i=0;i<4;i++)
+			{
+				festool_charger_info.batteryVoltage[i+chargerid*4] = dst.data[2*i];
+				festool_charger_info.batteryVoltage[i+chargerid*4] |= (dst.data[2*i+1] << 8);
+			}
+			break;
+			
+		case 0x604:
+		case 0x624:
+			chargerid=(dst.id-0x604) >> 5;
+		
+			for(i=0;i<4;i++)
+			{
+				festool_charger_info.batteryCapacity[i+chargerid*4] = dst.data[i];
 			}
 			break;
 
@@ -630,7 +644,7 @@ void charger_update( void )
 	
 			if( 2 == charger_version_array[0].major )
 			{
-				for(i=0;i<4;++i)
+				for(i=0;i<8;++i)
 				{
 					if(festool_charger_info.akku_load[i])
 					{
@@ -795,6 +809,8 @@ void charger_update( void )
 
 unsigned char charger_is_battery_low( void )
 {
+	unsigned char res=0;
+	
 	if( io_is_ext_power() )
 	{
 		return 0;
@@ -802,7 +818,19 @@ unsigned char charger_is_battery_low( void )
 	
 	if( 2 == charger_version_array[0].major )
 	{
-		return festool_charger_info.isBatteryLow;
+		if(festool_charger_info.time[0]>0 && festool_charger_info.time[1]>0)
+		{
+			res = festool_charger_info.isBatteryLow[0] & festool_charger_info.isBatteryLow[1];
+		}
+		else if(festool_charger_info.time[0]>0)
+		{
+			res = festool_charger_info.isBatteryLow[0];
+		}
+		else
+		{
+			res = festool_charger_info.isBatteryLow[1];
+		}
+		return res;
 	}
 	else
 	{

@@ -187,15 +187,64 @@ void terminal_update(void)
 			else if(0 == strncmp(command,"finfo",5))
 			{
 				printf("Festool charger\r\n");
-				printf("  time              %ums\r\n", festool_charger_info.time);
-				printf("  Akku Sel          %d|%d|%d|%d\r\n", (int)festool_charger_info.akku_sel[0],(int)festool_charger_info.akku_sel[1],(int)festool_charger_info.akku_sel[2],(int)festool_charger_info.akku_sel[3]);
-				printf("  Akku load         %d|%d|%d|%d\r\n", (int)festool_charger_info.akku_load[0],(int)festool_charger_info.akku_load[1],(int)festool_charger_info.akku_load[2],(int)festool_charger_info.akku_load[3]);
-				printf("  Ext power         %d\r\n", (int)festool_charger_info.ext_power);
-				printf("  Charger present   %d\r\n", (int)festool_charger_info.charger_present);
-				printf("  MOS_ON_BATT1      %d\r\n", (int)festool_charger_info.mos_on_batt1);
-				printf("  Akku on           %d|%d|%d|%d\r\n", (int)festool_charger_info.akku_on[0],(int)festool_charger_info.akku_on[1],(int)festool_charger_info.akku_on[2],(int)festool_charger_info.akku_on[3]);
-				printf("  BatLow            %d\r\n", (int)festool_charger_info.isBatteryLow );
-				for(i=0;i<4;++i)
+				
+				printf("  time              ");
+				for(i=0;i<2;i++)
+				{
+					printf("|%ums", festool_charger_info.time[i]);
+				}
+				printf("\r\n");
+				
+				printf("  Akku Sel          ");
+				for(i=0;i<2;i++)
+				{
+					printf("|%d",(int)festool_charger_info.akku_sel[i]);
+				}
+				printf("\r\n");
+				
+				printf("  Akku load         ");
+				for(i=0;i<8;i++)
+				{
+					printf("|%d",(int)festool_charger_info.akku_load[i]);
+				}
+				printf("\r\n");
+				
+				printf("  Ext power         ");
+				for(i=0;i<2;i++)
+				{
+					printf("|%u", festool_charger_info.ext_power[i]);
+				}
+				printf("\r\n");
+				
+				printf("  Charger present   ");
+				for(i=0;i<2;i++)
+				{
+					printf("|%u", festool_charger_info.charger_present[i]);
+				}
+				printf("\r\n");
+				
+				printf("  MOS_ON_BATT1      ");
+				for(i=0;i<2;i++)
+				{
+					printf("|%u", festool_charger_info.mos_on_batt1[i]);
+				}
+				printf("\r\n");
+				
+				printf("  Akku on           ");
+				for(i=0;i<8;i++)
+				{
+					printf("|%d",(int)festool_charger_info.akku_on[i]);
+				}
+				printf("\r\n");
+				
+				printf("  BatLow           ");
+				for(i=0;i<2;i++)
+				{
+					printf("|%u", festool_charger_info.isBatteryLow[i]);
+				}
+				printf("\r\n");
+
+				for(i=0;i<8;++i)
 				{
 					printf("   Bat%d %.2fV -> %d%%\r\n",i,0.001f*festool_charger_info.batteryVoltage[i],(int)festool_charger_info.batteryCapacity[i]);
 				}

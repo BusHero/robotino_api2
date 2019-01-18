@@ -1,10 +1,7 @@
-
 SET(
 	NAME
 	rec_rpc
 )
-
-MESSAGE("NAME:${NAME}")
 
 SET( REC_RPC_INCLUDE_INSTALL_DIR include/rec/rpc )
 

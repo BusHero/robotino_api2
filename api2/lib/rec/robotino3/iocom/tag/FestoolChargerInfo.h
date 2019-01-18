@@ -29,19 +29,42 @@ namespace rec
 					{
 						QString str("TAG_FESTOOL_CHARGER_INFO:");
 
-						str += QString("\nTime %1").arg(_time);
-						
-						str += QString("\nExternal power is %1").arg(_externalPower ? "connected" : "not connected");
-						str += QString("\nCharger is %1").arg(_chargerConnected ? "connected" : "not connected");
-
-						for (int i = 0; i<4; ++i)
+						for (int i = 0; i < _time.size(); ++i)
 						{
-							str += QString("\nAkku %1").arg(i + 1);
-							str += QString("\n  sys connect %1").arg(_accuConnected[i]?"On":"Off");
-							str += QString("\n  loading %1").arg(_accuLoading[i] ? "On" : "Off");
-							str += QString("\n  voltage %1V").arg(_voltages[i]);
-							str += QString("\n  capacity %1\%").arg(_capacities[i]);
+							str += QString("\n time %1: %2").arg(i).arg(_time[i]);
 						}
+
+						for (int i = 0; i < _accuLoading.size(); ++i)
+						{
+							str += QString("\n %1 %2").arg(i).arg(_accuLoading[i] ? "loading" : "not loading");
+						}
+
+						for (int i = 0; i < _accuConnected.size(); ++i)
+						{
+							str += QString("\n %1 %2").arg(i).arg(_accuConnected[i] ? "connected" : "not connected");
+						}
+
+						for (int i = 0; i < _externalPower.size(); ++i)
+						{
+							str += QString("\n %1 %2").arg(i).arg(_externalPower[i] ? "external power" : "no external power");
+						}
+
+						for (int i = 0; i < _chargerConnected.size(); ++i)
+						{
+							str += QString("\n %1 %2").arg(i).arg(_chargerConnected[i] ? "charger connected" : "charger not connected");
+						}
+
+						for (int i = 0; i < _voltages.size(); ++i)
+						{
+							str += QString("\n voltage %1: %2").arg(i).arg(_voltages[i]);
+						}
+
+						for (int i = 0; i < _capacities.size(); ++i)
+						{
+							str += QString("\n capacity %1: %2").arg(i).arg(_capacities[i]);
+						}
+
+						str += "\n" + _message;
 
 						return str;
 					}
@@ -51,7 +74,7 @@ namespace rec
 						unsigned char ch = 0;
 						if (buffer->getChar((char*)&ch))
 						{
-							if (ch<18)
+							if (ch<41)
 							{
 								throw rec::robotino3::serialio::TagException(QString("TAG_FESTOOL_CHARGER_INFO length=%1 not allowed").arg((quint32)ch));
 							}
@@ -65,40 +88,45 @@ namespace rec
 							FestoolChargerInfoPointer readings = create();
 							const char* p = ba.constData();
 
-							readings->_time = decodeUInt32(p);
+							readings->_time[0] = decodeUInt32(p);
+							p += 4;
+
+							readings->_time[1] = decodeUInt32(p);
 							p += 4;
 							
-							unsigned char accuLoad = *(p++);
+							unsigned char ch = *(p++);
+							for (int i = 0; i < readings->_accuLoading.size(); ++i)
+							{
+								readings->_accuLoading[i] = ch & (1<<i);
+							}
 
-							if (accuLoad & 0x1)	readings->_accuLoading[0] = true;
-							else if (accuLoad & 0x2) readings->_accuLoading[1] = true;
-							else if (accuLoad & 0x4) readings->_accuLoading[2] = true;
-							else if (accuLoad & 0x8) readings->_accuLoading[3] = true;
-
-							if (accuLoad & 0x10)	readings->_accuConnected[0] = true;
-							else if (accuLoad & 0x20)	readings->_accuConnected[1] = true;
-							else if (accuLoad & 0x40)	readings->_accuConnected[2] = true;
-							else if (accuLoad & 0x80)	readings->_accuConnected[3] = true;
+							ch = *(p++);
+							for (int i = 0; i < readings->_accuConnected.size(); ++i)
+							{
+								readings->_accuConnected[i] = (ch & (1 << i));
+							}
 
 							unsigned char extPower = *(p++);
 
-							readings->_externalPower = (extPower & 0x1) != 0;
-							readings->_chargerConnected = (extPower & 0x2) != 0;
+							readings->_externalPower[0] = (extPower & 0x1) != 0;
+							readings->_chargerConnected[0] = (extPower & 0x2) != 0;
+							readings->_externalPower[1] = (extPower & 0x4) != 0;
+							readings->_chargerConnected[1] = (extPower & 0x8) != 0;
 
-							for (int i = 0; i < 4; ++i)
+							for (int i = 0; i < readings->_voltages.size(); ++i)
 							{
 								readings->_voltages[i] = 0.001f * decodeUInt16(p);
 								p += 2;
 							}
 
-							for (int i = 0; i < 4; ++i)
+							for (int i = 0; i < readings->_capacities.size(); ++i)
 							{
 								readings->_capacities[i] = *(p++);
 							}
 							
-							if(ba.size()>18)
+							if(ba.size()>41)
 							{
-								readings->_message = ba.mid(18);
+								readings->_message = ba.mid(41);
 							}
 
 							return readings;
@@ -109,11 +137,11 @@ namespace rec
 						}
 					}
 
-					unsigned int time() const { return _time; }
+					QVector<unsigned int> time() const { return _time; }
 					QVector<bool> accuLoading() const{ return _accuLoading;  }
 					QVector<bool> accuConnected() const{ return _accuConnected;  }
-					bool externalPower() const{ return _externalPower; }
-					bool chargerConnected() const { return _chargerConnected; }
+					QVector<bool> externalPower() const{ return _externalPower; }
+					QVector<bool> chargerConnected() const { return _chargerConnected; }
 					QVector<float> voltages() const { return _voltages; }
 					QVector<int> capacities() const { return _capacities; }
 					QString message() const { return _message; }
@@ -121,21 +149,21 @@ namespace rec
 				private:
 					FestoolChargerInfo()
 						: Tag(TAG_FESTOOL_CHARGER_INFO)
-						, _time(0)
-						, _accuLoading(4,false)
-						, _accuConnected(4,false)
-						, _externalPower(false)
-						, _chargerConnected(false)
-						, _voltages(4, 0)
-						, _capacities(4, 0)
+						, _time(2,0)
+						, _accuLoading(8,false)
+						, _accuConnected(8,false)
+						, _externalPower(2,false)
+						, _chargerConnected(2,false)
+						, _voltages(8, 0)
+						, _capacities(8, 0)
 					{
 					}
 
-					unsigned int _time;
+					QVector<unsigned int> _time;
 					QVector<bool> _accuLoading;
 					QVector<bool> _accuConnected;
-					bool _externalPower;
-					bool _chargerConnected;
+					QVector<bool> _externalPower;
+					QVector<bool> _chargerConnected;
 					QVector<float> _voltages;
 					QVector<int> _capacities;
 					QString _message;

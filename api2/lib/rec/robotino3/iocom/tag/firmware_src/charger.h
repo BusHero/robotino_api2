@@ -23,16 +23,16 @@ typedef struct
 
 typedef struct
 {
-	unsigned int time;
-	unsigned char akku_sel[4];
-	unsigned char akku_load[4];
-	unsigned char ext_power;
-	unsigned char charger_present;
-	unsigned char mos_on_batt1;
-	unsigned char akku_on[4];
-	unsigned short batteryVoltage[4]; //in mV
-	unsigned char batteryCapacity[4];
-	unsigned char isBatteryLow;
+	unsigned int time[2];
+	signed char akku_sel[2];
+	unsigned char akku_load[8];
+	unsigned char ext_power[2];
+	unsigned char charger_present[2];
+	unsigned char mos_on_batt1[2];
+	unsigned char akku_on[8];
+	unsigned short batteryVoltage[8]; //in mV
+	signed char batteryCapacity[8];
+	unsigned char isBatteryLow[2];
 } festool_charger_info_st;
 
 typedef struct

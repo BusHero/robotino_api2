@@ -1,10 +1,7 @@
-
 SET(
 	NAME
 	rec_cv_lt
 )
-
-MESSAGE("NAME:${NAME}")
 
 IF( WIN32 )
 	SET( ARCH win32 )

@@ -3,8 +3,6 @@ SET(
   rec_joystick
 )
 
-MESSAGE("NAME:${NAME}")
-
 SET( MAIN_HEADER Joystick.h )
 
 IF( WIN32 )
