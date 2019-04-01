@@ -16,6 +16,6 @@ How to compile Robotino API2?
 
 Don't try to compile the Robotino examples directly. The cmake scripts provided with the examples are incomplete and do not include all the required modules.
 
-Do be able to compile any Robotino project example use this CMake script instead:
+To be able to compile any Robotino project example use this CMake script instead:
 
 I could miss something. If you have problems with compiling or if you thinck I should describe some steps more precisely I am open to suggestions. 
