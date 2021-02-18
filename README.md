@@ -18,4 +18,4 @@ Don't try to compile the Robotino examples directly. The cmake scripts provided 
 
 To be able to compile any Robotino project example use this CMake script instead:
 
-I could miss something. If you have problems with compiling or if you thinck I should describe some steps more precisely I am open to suggestions. 
+I could miss something. If you have problems with compiling or if you think I should describe some steps more precisely I am open to suggestions. 
